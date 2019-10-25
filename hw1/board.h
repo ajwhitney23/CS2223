@@ -1,12 +1,16 @@
+#define HEA 0
+#define DIA 1
+#define SPA 2
+class board
+{
+private:
+    int numOf[];
 
-class board {
-    public:
-    int num = 0;
-    int maxNum = 15;
-
+public:
     board();
     virtual ~board();
     void printBoard();
+    int alterBoard(int type, int num); //0 for fail alter, 1 for alter pass
 };
 
 /*

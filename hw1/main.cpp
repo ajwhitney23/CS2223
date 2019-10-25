@@ -1,11 +1,13 @@
 #include <cstdlib>
 #include <iostream>
 #include "production.h"
+#include "board.h"
 class production;
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    //create production
-    //run production
-
+    board b;
+    b.printBoard();
+    //b.alterBoard(1, 1);
+    //b.printBoard();
 }
