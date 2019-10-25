@@ -1,6 +1,15 @@
 #define HEA 0
 #define DIA 1
 #define SPA 2
+
+#define SYM_HEA "\u2665"
+#define SYM_DIA "\u2666"
+#define SYM_SPA "\u2660"
+
+#define SYM_HEA_f "\u2661"
+#define SYM_DIA_f "\u2662"
+#define SYM_SPA_f "\u2664"
+
 class board
 {
 private:

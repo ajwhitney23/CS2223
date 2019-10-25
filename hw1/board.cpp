@@ -43,34 +43,37 @@ void board::printBoard()
     {
         if (i == 1)
         {
-            cout << endl<< "   "; //next and set spaces for second line
+            cout << endl
+                 << "   "; //next and set spaces for second line
         }
 
         if (numHEA > 0)
         {
-            cout << "H ";
-            numHEA-=1;
+            cout << SYM_HEA << " ";
+            numHEA -= 1;
         }
         else
         {
-            cout << "0 ";
+            cout << SYM_HEA_f << " ";
         }
     }
-    cout <<endl<< "  "; //next and set spaces for third line
+    cout << endl
+         << "  "; //next and set spaces for third line
     for (int i = 0; i < 7; i++)
     {
         if (i == 3)
         {
-            cout <<endl <<" "; //next and set spaces for fourth line
+            cout << endl
+                 << " "; //next and set spaces for fourth line
         }
         if (numDIA > 0)
         {
-            cout << "D ";
-            numDIA-=1;
+            cout << SYM_DIA << " ";
+            numDIA -= 1;
         }
         else
         {
-            cout << "0 ";
+            cout << SYM_DIA_f << " ";
         }
     }
     cout << endl; //next and set spaces for fifth line
@@ -78,12 +81,12 @@ void board::printBoard()
     {
         if (numSPA > 0)
         {
-            cout << "S ";
-            numSPA-=1;
+            cout << SYM_SPA << " ";
+            numSPA -= 1;
         }
         else
         {
-            cout << "0 ";
+            cout << SYM_SPA_f << " ";
         }
     }
     cout << endl;
