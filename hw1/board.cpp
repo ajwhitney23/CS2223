@@ -14,6 +14,7 @@ board::board()
 
 board::~board()
 {
+    //comment
 }
 
 int board::alterBoard(int t, int n)
