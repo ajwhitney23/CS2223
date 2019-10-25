@@ -7,13 +7,11 @@ class production;
 using namespace std;
 int main(int argc, char *argv[])
 {
+    //testing code for functions... actually main will pretty much be running produciton
     board b;
     b.printBoard();
-    //assert(b.alterBoard(HEA,3));
     b.printBoard();
-    //assert(b.alterBoard(DIA,4));
     b.printBoard();
-    //assert(!b.alterBoard(SPA,7));
     b.printBoard();
 
     board bo;
