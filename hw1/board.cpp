@@ -16,7 +16,10 @@ board::~board()
 {
     //comment
 }
-
+/*
+* t = type
+* n = number of ones to flip
+*/
 int board::alterBoard(int t, int n)
 {
     if (numOf[t] == 0 || (numOf[t] - n < 0))
@@ -29,14 +32,15 @@ int board::alterBoard(int t, int n)
         return 1;
     }
 }
-
+/*
+to be called whever printing board to terminal... (done after moves)
+*/
 void board::printBoard()
 {
+    //redunant
     int numHEA = numOf[HEA];
     int numDIA = numOf[DIA];
     int numSPA = numOf[SPA];
-    //printf("%d %d %d\n", numOf[HEA], numOf[DIA], numOf[SPA]);
-    //printf("%d %d %d\n", numHEA, numDIA, numSPA);
 
     cout << "    "; //set spaces for first line
     for (int i = 0; i < 3; i++)
