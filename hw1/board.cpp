@@ -7,7 +7,6 @@ using namespace std;
 //constructor
 board::board()
 {
-    int numOf[3];
     numOf[HEA] = 3;
     numOf[DIA] = 7;
     numOf[SPA] = 5;
@@ -35,7 +34,8 @@ void board::printBoard()
     int numHEA = numOf[HEA];
     int numDIA = numOf[DIA];
     int numSPA = numOf[SPA];
-    printf("%d %d %d\n", numHEA, numDIA, numSPA);
+    //printf("%d %d %d\n", numOf[HEA], numOf[DIA], numOf[SPA]);
+    //printf("%d %d %d\n", numHEA, numDIA, numSPA);
 
     cout << "    "; //set spaces for first line
     for (int i = 0; i < 3; i++)

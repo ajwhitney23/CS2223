@@ -4,7 +4,7 @@
 class board
 {
 private:
-    int numOf[];
+    int numOf[3];
 
 public:
     board();
