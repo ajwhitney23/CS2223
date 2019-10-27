@@ -95,3 +95,9 @@ void board::printBoard()
     }
     cout << endl;
 }
+
+
+int board::numLeft(int type)
+{
+    // return the number of each type left... can be used to help user, along with helping bot
+}

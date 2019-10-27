@@ -3,7 +3,7 @@ class production
 {
 private:
     int turn = 0;
-
+    
 public:
     void gameStart();
     void printValidMoves();
