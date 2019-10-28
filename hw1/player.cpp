@@ -22,15 +22,15 @@ int player::makeMove()
     do
     {
         cout << "Enter type and quantity\nValid types and max quantity are:" << endl;
-        if (temp = b->numLeft(HEA))
+        if ((temp = b->numLeft(HEA)))
         {
             cout << "H: " << temp << endl; //print number of H, if any
         }
-        if (temp = b->numLeft(DIA))
+        if ((temp = b->numLeft(DIA)))
         {
             cout << "D: " << temp << endl; //print number of D, if any
         }
-        if (temp = b->numLeft(SPA))
+        if ((temp = b->numLeft(SPA)))
         {
             cout << "S: " << temp << endl; //print number of S, if any
         }

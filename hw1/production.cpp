@@ -28,8 +28,8 @@ int production::gameStart()
     } while (whoFirst != 1 || whoFirst != 0);
 
     board b;
-    player aPlayer(&b); //initialize player
-    bot aBot(&b);       //intialize bot
+    player aPlayer = player(&b); //initialize player
+    bot aBot = bot(&b);          //intialize bot
 
     turn = whoFirst;    //set turn to the proper start
     while (turn != 999) //while game is still active (to terminal set turn to 999)
