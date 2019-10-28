@@ -12,6 +12,10 @@ production::production()
     turn = 0;
 }
 
+production::~production()
+{
+}
+
 int production::gameStart()
 {
     int whoFirst = 0;

@@ -2,7 +2,7 @@
 class production
 {
 private:
-    int turn = 0;
+    int turn;
 
 public:
     production();

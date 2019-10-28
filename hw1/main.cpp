@@ -2,7 +2,7 @@
 #include <iostream>
 #include "production.h"
 #include "board.h"
-class production;
+//class production;
 
 using namespace std;
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     }*/
     production p;
-    if (p.gameStart)
+    if (p.gameStart())
     {
         cout << "Player WINS!" << endl;
     }
