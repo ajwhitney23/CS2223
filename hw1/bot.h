@@ -11,11 +11,10 @@ need to figure out what to do based on result
 class bot
 {
 private:
-    
+    board *b;
 
 public:
-    bot();
+    bot(board *aBoard);
     virtual ~bot();
     int makeMove();
-    int calcMove(int a, int b, int c);
 };

@@ -24,7 +24,8 @@ public:
     virtual ~board();
     void printBoard();
     int alterBoard(int type, int num); //0 for fail alter, 1 for alter pass
-    int numLeft(int type); //need to code
+    int numLeft(int type);             //need to code
+    int isEmpty();
 };
 
 /*

@@ -9,7 +9,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     //testing code for functions... actually main will pretty much be running produciton
-    board b;
+    /*board b;
     b.printBoard();
     b.printBoard();
     b.printBoard();
@@ -23,6 +23,16 @@ int main(int argc, char *argv[])
         }
         bo.printBoard();
 
+    }*/
+    production p;
+    if (p.gameStart)
+    {
+        cout << "Player WINS!" << endl;
     }
+    else
+    {
+        cout << "Bot WINS!" << endl;
+    }
+
     //call production to start / run game
 }

@@ -54,7 +54,7 @@ void board::printBoard()
         if (numHEA > 0)
         {
             cout << SYM_HEA << " ";
-            numHEA -= 1;
+            numHEA--;
         }
         else
         {
@@ -73,7 +73,7 @@ void board::printBoard()
         if (numDIA > 0)
         {
             cout << SYM_DIA << " ";
-            numDIA -= 1;
+            numDIA--;
         }
         else
         {
@@ -86,7 +86,7 @@ void board::printBoard()
         if (numSPA > 0)
         {
             cout << SYM_SPA << " ";
-            numSPA -= 1;
+            numSPA--;
         }
         else
         {
@@ -96,8 +96,19 @@ void board::printBoard()
     cout << endl;
 }
 
-
 int board::numLeft(int type)
 {
-    // return the number of each type left... can be used to help user, along with helping bot
+    if (0 <= type && type <= 2)
+    {
+        return numOf[type];
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+int board::isEmpty()
+{
+    return (numLeft(HEA) == 0 && numLeft(DIA) == 0 && numLeft(SPA) == 0);
 }
