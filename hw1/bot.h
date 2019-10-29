@@ -17,4 +17,5 @@ public:
     bot(board *aBoard);
     virtual ~bot();
     int makeMove();
+    void hasWinning();
 };
