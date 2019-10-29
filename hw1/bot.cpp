@@ -25,5 +25,3 @@ int bot::makeMove()
 
     return 1;
 }
-
-//
