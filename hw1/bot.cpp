@@ -70,10 +70,12 @@ int randomFromArray(int array[])
     int i;
     int num;
     int noneLeft = -1;
-    //i = rand(out of 3)
+    //i = rand(out of 3); (1-3)
+    //i -= i;
     while(array[i] == noneLeft)
     {
-        //i = rand(out of 3);
+        //i = rand(out of 3); (1-3)
+        //i -=i;
     }
     std::cout << array[i] << std::endl; //testing
     num = array[i];
