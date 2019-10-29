@@ -10,9 +10,9 @@ board::board()
     numOf[HEA] = 3;
     numOf[DIA] = 7;
     numOf[SPA] = 5;
-    typesLeft[HEA] = 1;
-    typesLeft[DIA] = 2;
-    typesLeft[SPA] = 3;
+    typesLeft[HEA] = HEA;
+    typesLeft[DIA] = DIA;
+    typesLeft[SPA] = SPA;
 }
 
 board::~board()
@@ -119,6 +119,8 @@ int board::isEmpty()
 
 void board::updateTypesLeft(int t)
 {
-    //copy old array into new array 
-    //set board array to new array
+    if (numOf[t] == 0)
+    {
+        typesLeft[t] == -1;
+    }
 }

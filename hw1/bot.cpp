@@ -2,6 +2,8 @@
 //img of class 2 notes on strategy will be uploaded
 //including randomization
 //https://cosmosmagazine.com/mathematics/how-to-win-at-nim
+#include <iostream>
+#include <cstdlib>
 #include "board.h"
 #include "bot.h"
 
@@ -27,12 +29,11 @@ int bot::makeMove()
     }
     else 
     {
-        //make random move
-        //type = rand(typesLeft[])
+        type = randomFromArray(b->typesLeft);
         //qty = rand(b->numLeft(type));
+        b->alterBoard(type, qty);
     }
 
-    b->alterBoard(type, qty);
 
     return 1;
 }
@@ -66,5 +67,15 @@ int bot::hasWinning(board *aBoard)
 
 int randomFromArray(int array[])
 {
-
+    int i;
+    int num;
+    int noneLeft = -1;
+    //i = rand(out of 3)
+    while(array[i] == noneLeft)
+    {
+        //i = rand(out of 3);
+    }
+    std::cout << array[i] << std::endl; //testing
+    num = array[i];
+    return num;
 }
