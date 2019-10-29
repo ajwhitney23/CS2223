@@ -21,7 +21,7 @@ int bot::makeMove()
     int qty;
     
     //use board to calc then execute alter board
-    if (1) //if has move with winning strategy
+    if (hasWinning(b)) //if has move with winning strategy
     {
         //move made in hasWinning()
     }
@@ -29,7 +29,7 @@ int bot::makeMove()
     {
         //make random move
         //type = rand(typesLeft[])
-        //qty =rand(numLeft(type))
+        //qty = rand(b->numLeft(type));
     }
 
     b->alterBoard(type, qty);
@@ -37,7 +37,7 @@ int bot::makeMove()
     return 1;
 }
 
-void bot::hasWinning()
+int bot::hasWinning(board *aBoard)
 {
     int A;
     int B;
@@ -62,4 +62,9 @@ void bot::hasWinning()
 
 
     */
+}
+
+int randomFromArray(int array[])
+{
+
 }
