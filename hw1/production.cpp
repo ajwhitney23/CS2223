@@ -19,55 +19,56 @@ production::~production()
 
 int production::gameStart()
 {
-    int temp;
-    int whoFirst = 0;
-    cout << "Welcome to the game!" << endl;
-    //user goes on odd num, AI goes on even numbers
+    int whoFirst = 0; //initialize local variables
+    cout << "Welcome to the game!" << endl; //welcome screen
+    //users goes on 1, bot goes on 0
     int loop = 0;
-    while (loop < 10)
+    while (loop < 10) //while loop ensures that correct input is selected, if not after certain amt of attempts terminates
     {
         cout << "Enter '1' if you would like to go first or '0' if you would like the AI to make the first move" << endl;
         cin >> whoFirst;
-        if ((whoFirst > 1) || (whoFirst < 0))
+        if ((whoFirst > 1) || (whoFirst < 0)) //check if input not correct
         {
             cout << "You have entered an incorrect number, please try again." << endl;
             loop++;
         }
-        else
+        else //if is correct breaks loop
         {
             break;
         }
     }
-    if (loop == 10)
+    if (loop == 10) //checks how long loop went
     {
         cout << "maximum number of attempts reached" << endl;
         exit(1);
     }
-
+    //initialize board, board pointer, player, and bot
     board b = board();
     board *bp = &b;
-    player aPlayer; //initialize player
-    bot aBot;       //intialize bot
+    player aPlayer; 
+    bot aBot;       
 
     turn = whoFirst;    //set turn to the proper start
-    while (turn != 999) //while game is still active (to terminal set turn to 999)
+    int isWinner = 0; //set that there isnt winner
+    while (!isWinner) //should run until someone wins
     {
         switch (turn % 2) //alternate turns
         {
         case 1:
             cout << "---------PLAYER--------------------" << endl;
-            b.printBoard();            //before print
+            b.printBoard();            //print board
             if (!aPlayer.makeMove(bp)) //player move error check
             {
                 cout << "error occured" << endl;
                 exit(1);
                 break;
             }
-            b.printBoard(); //after print
-            if (b.isEmpty())
+            b.printBoard(); //print after move
+            if (b.isEmpty()) //check to see if player won
             {
                 return 1; //player win
             }
+            //way to slow down program for user
             cout << endl;
             cin.ignore();
             cout << "Press Enter to continue..." << endl;
@@ -77,18 +78,19 @@ int production::gameStart()
 
         case 0:
             cout << "---------BOT-----------------------" << endl;
-            b.printBoard();         //before print
+            b.printBoard();         //print board
             if (!aBot.makeMove(bp)) //bot move error check
             {
                 cout << "error occured" << endl;
                 exit(1);
                 break;
             }
-            b.printBoard(); //after print
-            if (b.isEmpty())
+            b.printBoard(); //print after
+            if (b.isEmpty()) //check to see if bot won
             {
                 return 0; //bot win
             }
+            //way to slow down program for user
             cout << endl;
             cin.ignore();
             cout << "Press Enter to continue..." << endl;
@@ -96,11 +98,11 @@ int production::gameStart()
             turn++; //add to turn
             break;
 
-        default:
+        default: //should only occur w/ error
             cout << "error occured" << endl;
             exit(1);
             break;
         }
     }
-    return -1;
+    return -1; //error would occur for this to return 
 }
