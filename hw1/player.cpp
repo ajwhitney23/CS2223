@@ -74,7 +74,5 @@ int player::makeMove(board *b)
     cout << "\nQTY: ";
     cin >> qty;
 
-    return b->alterBoard(type, qty); //alter board
+    return !(b->alterBoard(type, qty)); //alter board
 }
-
-//

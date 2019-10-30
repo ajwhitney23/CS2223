@@ -25,8 +25,11 @@ board::~board()
 */
 int board::alterBoard(int t, int n)
 {
-    if (numOf[t] == 0 || (numOf[t] - n < 0))
+    int i = numOf[t];
+    cout << "entered board" << endl;
+    if (i == 0 || ((i - n) < 0))
     {
+        cout << "not enough" << endl;
         return 0;
     }
     else
