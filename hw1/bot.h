@@ -10,13 +10,10 @@ need to figure out what to do based on result
 
 class bot
 {
-private:
-    board *b;
-
 public:
-    bot(board *aBoard);
+    bot();
     virtual ~bot();
     int makeMove(board *b);
-    int hasWinning(board *aBoard);
+    int hasWinning(board *b);
     int randomFromBoard(board *b);
 };

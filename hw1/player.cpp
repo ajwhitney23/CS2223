@@ -5,14 +5,12 @@
 
 using namespace std;
 
-player::player(board *aBoard)
+player::player()
 {
-    board *b = aBoard;
 }
 
 player::~player()
 {
-    delete b;
 }
 
 int player::makeMove(board *b)
@@ -20,7 +18,6 @@ int player::makeMove(board *b)
     int type;
     char typeS;
     int qty;
-    int temp;
     int h = b->numLeft(HEA);
     int d = b->numLeft(DIA);
     int s = b->numLeft(SPA);
@@ -61,28 +58,42 @@ int player::makeMove(board *b)
         cout << "S: " << s << endl; //print number of S, if any
     }
 
-    cout << "Type: ";
-    cin >> typeS;
-    switch (typeS)
+    while (true)
     {
-    case 'H':
-        type = 0;
-        break;
+        cout << "Type: ";
+        cin >> typeS;
+        if (typeS == 'H')
+        {
+            type = 0;
+        }
+        else if (typeS == 'D')
+        {
+            type = 1;
+        }
+        else if (typeS == 'S')
+        {
+            type = 2;
+        }
+        else
+        {
+            cout << "Type not valid" << endl;
+            type = -1;
+        }
 
-    case 'D':
-        type = 1;
-        break;
-    case 'S':
-        type = 2;
-        break;
-
-    default:
-        cout << "Type not valid" << endl;
-        exit(1);
-        break;
+        if (type != -1)
+        {
+            cout << "QTY: ";
+            cin >> qty;
+            if (b->numLeft(type) >= qty)
+            {
+                break;
+            }
+            else
+            {
+                cout << "QTY not in range" << endl;
+            }
+        }
     }
-    cout << "\nQTY: ";
-    cin >> qty;
 
     return !(b->alterBoard(type, qty)); //alter board
 }

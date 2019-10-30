@@ -10,11 +10,8 @@ need to figure out what to do based on result
 
 class player
 {
-private:
-    board *b;
-
 public:
-    player(board *aBoard);
+    player();
     virtual ~player();
     int makeMove(board *b);
 };

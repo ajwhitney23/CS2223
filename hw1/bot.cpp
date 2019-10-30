@@ -8,14 +8,12 @@
 #include "board.h"
 #include "bot.h"
 
-bot::bot(board *aBoard)
+bot::bot()
 {
-    board *b = aBoard;
 }
 
 bot::~bot()
 {
-    delete b;
 }
 
 int bot::makeMove(board *b)
@@ -63,25 +61,26 @@ int bot::hasWinning(board *aBoard)
 
 
     */
-   return 0;
+    return 0;
 }
 
 int bot::randomFromBoard(board *b)
 {
-    int t;//type
-    int q;//quantity
-    int i;//placeholder
+    int t; //type
+    int q; //quantity
+    int i; //placeholder
 
-    i = rand() % 3; //picking type
+    i = rand() % 3;               //picking type
     int noneLeft = b->numLeft(i); //
-    if(noneLeft == -1)
+    if (noneLeft == -1)
     {
         noneLeft = 1;
     }
-    while (noneLeft){
+    while (noneLeft)
+    {
         i = rand() % 3;
         noneLeft = b->numLeft(i);
-        if(noneLeft == -1)
+        if (noneLeft == -1)
         {
             noneLeft = 1;
         }

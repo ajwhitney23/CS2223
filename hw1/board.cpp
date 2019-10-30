@@ -119,11 +119,10 @@ int board::isEmpty()
     return (numLeft(HEA) == 0 && numLeft(DIA) == 0 && numLeft(SPA) == 0);
 }
 
-
 void board::updateTypesLeft(int t)
 {
     if (numOf[t] == 0)
     {
-        typesLeft[t] == -1;
+        typesLeft[t] = -1;
     }
 }
