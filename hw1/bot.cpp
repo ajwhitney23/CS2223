@@ -8,6 +8,8 @@
 #include "board.h"
 #include "bot.h"
 
+using namespace std;
+
 bot::bot()
 {
 }
@@ -25,15 +27,14 @@ int bot::makeMove(board *b)
     if (hasWinning(b)) //if has move with winning strategy
     {
         //move made in hasWinning()
+        return 0;
     }
     else
     {
         //type = randomFromArray(b->typesLeft);
         //qty = rand(b->numLeft(type));
-        randomFromBoard(b);
+        return randomFromBoard(b);
     }
-
-    return 1;
 }
 
 int bot::hasWinning(board *aBoard)
@@ -68,24 +69,19 @@ int bot::randomFromBoard(board *b)
 {
     int t; //type
     int q; //quantity
-    int i; //placeholder
+    int n; //numleft
+    int i; //index
 
-    i = rand() % 3;               //picking type
-    int noneLeft = b->numLeft(i); //
-    if (noneLeft == -1)
+    while (true)
     {
-        noneLeft = 1;
-    }
-    while (noneLeft)
-    {
-        i = rand() % 3;
-        noneLeft = b->numLeft(i);
-        if (noneLeft == -1)
+        t = rand() % 3;    //picking type/index
+        n = b->numLeft(t); //get number left
+        if (n != 0)
         {
-            noneLeft = 1;
+            q = (rand() % n) + 1; //get random qty
+            break;
         }
     }
-    t = i;
-    q = noneLeft;
+    cout << t << " " << q << flush;
     return b->alterBoard(t, q);
 }

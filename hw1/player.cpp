@@ -95,5 +95,5 @@ int player::makeMove(board *b)
         }
     }
 
-    return !(b->alterBoard(type, qty)); //alter board
+    return b->alterBoard(type, qty); //alter board
 }

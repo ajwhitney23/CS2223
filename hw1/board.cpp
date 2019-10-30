@@ -34,6 +34,7 @@ int board::alterBoard(int t, int n)
     }
     else
     {
+        cout << "board altered" << endl;
         numOf[t] -= n;
         return 1;
     }

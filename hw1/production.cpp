@@ -42,8 +42,8 @@ int production::gameStart()
         {
         case 1:
             cout << "---------PLAYER--------------------" << endl;
-            b.printBoard();           //before print
-            if (aPlayer.makeMove(bp)) //player move
+            b.printBoard();            //before print
+            if (!aPlayer.makeMove(bp)) //player move error check
             {
                 cout << "error occured" << endl;
                 exit(1);
@@ -59,8 +59,8 @@ int production::gameStart()
 
         case 0:
             cout << "---------BOT-----------------------" << endl;
-            b.printBoard();        //before print
-            if (aBot.makeMove(bp)) //bot move
+            b.printBoard();         //before print
+            if (!aBot.makeMove(bp)) //bot move error check
             {
                 cout << "error occured" << endl;
                 exit(1);
