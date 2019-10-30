@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <ctime>
 #include "production.h"
 #include "board.h"
 //class production;
@@ -8,6 +9,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    srand(time(NULL));
     //testing code for functions... actually main will pretty much be running produciton
     /*board b;
     b.printBoard();

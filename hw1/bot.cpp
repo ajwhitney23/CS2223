@@ -4,6 +4,7 @@
 //https://cosmosmagazine.com/mathematics/how-to-win-at-nim
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 #include "board.h"
 #include "bot.h"
 
@@ -31,7 +32,7 @@ int bot::makeMove(board *b)
     {
         //type = randomFromArray(b->typesLeft);
         //qty = rand(b->numLeft(type));
-        b->alterBoard(type, qty);
+        randomFromBoard(b);
     }
 
     return 1;
@@ -62,19 +63,30 @@ int bot::hasWinning(board *aBoard)
 
 
     */
+   return 0;
 }
 
-int bot::randomFromBoard()
+int bot::randomFromBoard(board *b)
 {
-    int i;
-    int num;
-    i = rand() % 3;
-    int noneLeft = b->numLeft(i);
-    while (!noneLeft)
+    int t;//type
+    int q;//quantity
+    int i;//placeholder
+
+    i = rand() % 3; //picking type
+    int noneLeft = b->numLeft(i); //
+    if(noneLeft == -1)
     {
+        noneLeft = 1;
+    }
+    while (noneLeft){
         i = rand() % 3;
         noneLeft = b->numLeft(i);
+        if(noneLeft == -1)
+        {
+            noneLeft = 1;
+        }
     }
-    //std::cout << array[i] << std::endl; //testing
-    return num;
+    t = i;
+    q = noneLeft;
+    return b->alterBoard(t, q);
 }

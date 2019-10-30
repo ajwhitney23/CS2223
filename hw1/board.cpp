@@ -29,7 +29,7 @@ int board::alterBoard(int t, int n)
     cout << "entered board" << endl;
     if (i == 0 || ((i - n) < 0))
     {
-        cout << "not enough" << endl;
+        cout << "quanity not within correct range" << endl;
         return 0;
     }
     else

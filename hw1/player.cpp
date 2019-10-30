@@ -60,31 +60,29 @@ int player::makeMove(board *b)
     {
         cout << "S: " << s << endl; //print number of S, if any
     }
-    do
+
+    cout << "Type: ";
+    cin >> typeS;
+    switch (typeS)
     {
-        cout << "Type: ";
-        cin >> typeS;
-        switch (typeS)
-        {
-        case 'H':
-            type = 0;
-            break;
+    case 'H':
+        type = 0;
+        break;
 
-        case 'D':
-            type = 1;
-            break;
-        case 'S':
-            type = 2;
-            break;
+    case 'D':
+        type = 1;
+        break;
+    case 'S':
+        type = 2;
+        break;
 
-        default:
-            cout << "Type not valid" << endl;
-            exit(1);
-            break;
-        }
-        cout << "\nQTY: ";
-        cin >> qty;
-    } while
+    default:
+        cout << "Type not valid" << endl;
+        exit(1);
+        break;
+    }
+    cout << "\nQTY: ";
+    cin >> qty;
 
-        return !(b->alterBoard(type, qty)); //alter board
+    return !(b->alterBoard(type, qty)); //alter board
 }

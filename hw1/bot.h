@@ -18,5 +18,5 @@ public:
     virtual ~bot();
     int makeMove(board *b);
     int hasWinning(board *aBoard);
-    int randomFromBoard();
+    int randomFromBoard(board *b);
 };
