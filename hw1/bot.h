@@ -16,6 +16,6 @@ private:
 public:
     bot(board *aBoard);
     virtual ~bot();
-    int makeMove();
+    int makeMove(board *b);
     int hasWinning(board *aBoard);
 };

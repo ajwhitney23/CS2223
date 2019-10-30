@@ -16,5 +16,5 @@ private:
 public:
     player(board *aBoard);
     virtual ~player();
-    int makeMove();
+    int makeMove(board *b);
 };

@@ -17,7 +17,7 @@ bot::~bot()
     delete b;
 }
 
-int bot::makeMove()
+int bot::makeMove(board *b)
 {
     int type;
     int qty;
@@ -29,7 +29,7 @@ int bot::makeMove()
     }
     else 
     {
-        type = randomFromArray(b->typesLeft);
+        //type = randomFromArray(b->typesLeft);
         //qty = rand(b->numLeft(type));
         b->alterBoard(type, qty);
     }
