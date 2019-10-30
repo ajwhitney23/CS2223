@@ -48,31 +48,43 @@ int player::makeMove(board *b)
     } while ((0 <= type && type <= 2) && (b->numLeft(type) >= qty)); //if type is correct, check if number available is good
     */
     cout << "Enter type and quantity\nValid types and max quantity are:" << endl;
-    cout << "H: " << h << endl;
-    cout << "D: " << d << endl;
-    cout << "S: " << s << endl;
-    cout << "Type: ";
-    cin >> typeS;
-    switch (typeS)
+    if (h)
     {
-    case 'H':
-        type = 0;
-        break;
-    
-    case 'D':
-        type = 1;
-        break;
-    case 'S':
-        type = 2;
-        break;
-    
-    default:
-        cout << "Type not valid" << endl;
-        exit(1);
-        break;
+        cout << "H: " << h << endl; //print number of H, if any
     }
-    cout << "\nQTY: ";
-    cin >> qty;
+    if (d)
+    {
+        cout << "D: " << d << endl; //print number of D, if any
+    }
+    if (s)
+    {
+        cout << "S: " << s << endl; //print number of S, if any
+    }
+    do
+    {
+        cout << "Type: ";
+        cin >> typeS;
+        switch (typeS)
+        {
+        case 'H':
+            type = 0;
+            break;
 
-    return !(b->alterBoard(type, qty)); //alter board
+        case 'D':
+            type = 1;
+            break;
+        case 'S':
+            type = 2;
+            break;
+
+        default:
+            cout << "Type not valid" << endl;
+            exit(1);
+            break;
+        }
+        cout << "\nQTY: ";
+        cin >> qty;
+    } while
+
+        return !(b->alterBoard(type, qty)); //alter board
 }

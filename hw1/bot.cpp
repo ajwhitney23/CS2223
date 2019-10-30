@@ -21,19 +21,18 @@ int bot::makeMove(board *b)
 {
     int type;
     int qty;
-    
+
     //use board to calc then execute alter board
     if (hasWinning(b)) //if has move with winning strategy
     {
         //move made in hasWinning()
     }
-    else 
+    else
     {
         //type = randomFromArray(b->typesLeft);
         //qty = rand(b->numLeft(type));
         b->alterBoard(type, qty);
     }
-
 
     return 1;
 }
@@ -65,17 +64,17 @@ int bot::hasWinning(board *aBoard)
     */
 }
 
-int randomFromArray(int array[])
+int bot::randomFromBoard()
 {
     int i;
     int num;
-    int noneLeft = -1;
     i = rand() % 3;
-    while(array[i] == noneLeft)
+    int noneLeft = b->numLeft(i);
+    while (!noneLeft)
     {
-        i = rand() % 3
+        i = rand() % 3;
+        noneLeft = b->numLeft(i);
     }
-    std::cout << array[i] << std::endl; //testing
-    num = array[i];
+    //std::cout << array[i] << std::endl; //testing
     return num;
 }
