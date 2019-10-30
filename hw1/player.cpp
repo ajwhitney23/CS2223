@@ -15,37 +15,18 @@ player::~player()
 
 int player::makeMove(board *b)
 {
-    int type;
-    char typeS;
-    int qty;
-    int h = b->numLeft(HEA);
+    int type; //type to be flipped
+    char typeS; //type in string format
+    int qty; //number to be flipped
+    //number of hearts, diamonds, spades
+    int h = b->numLeft(HEA); 
     int d = b->numLeft(DIA);
     int s = b->numLeft(SPA);
-    /*
-    do
-    {
-        cout << "Enter type and quantity\nValid types and max quantity are:" << endl;
-        if ((temp = b->numLeft(HEA)))
-        {
-            cout << "H: " << temp << endl; //print number of H, if any
-        }
-        if ((temp = b->numLeft(DIA)))
-        {
-            cout << "D: " << temp << endl; //print number of D, if any
-        }
-        if ((temp = b->numLeft(SPA)))
-        {
-            cout << "S: " << temp << endl; //print number of S, if any
-        }
-        cout << "Type: " << flush;
-        cin >> type;
-        cout << "\nQTY: " << flush;
-        cin >> qty;
-
-    } while ((0 <= type && type <= 2) && (b->numLeft(type) >= qty)); //if type is correct, check if number available is good
-    */
+    
+    //ask user what they would like to do
     cout << "Enter type and quantity\nValid types and max quantity are:" << endl;
-    if (h)
+    //each if checks if there are still moves available for the item
+    if (h) 
     {
         cout << "H: " << h << endl; //print number of H, if any
     }
@@ -57,6 +38,7 @@ int player::makeMove(board *b)
     {
         cout << "S: " << s << endl; //print number of S, if any
     }
+    //loop to check if valid move if reaches 10 attempts that failed, program ends
     int loop = 0;
     while (loop < 10)
     {
