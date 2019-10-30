@@ -26,7 +26,7 @@ board::~board()
 int board::alterBoard(int t, int n)
 {
     int i = numOf[t];
-    cout << "entered board" << endl;
+    //cout << "entered board" << endl;
     if (i == 0 || ((i - n) < 0))
     {
         cout << "quanity not within correct range" << endl;
@@ -34,7 +34,7 @@ int board::alterBoard(int t, int n)
     }
     else
     {
-        cout << "board altered" << endl;
+        //cout << "board altered" << endl;
         numOf[t] -= n;
         return 1;
     }

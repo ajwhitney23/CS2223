@@ -27,7 +27,7 @@ int bot::makeMove(board *b)
     if (hasWinning(b)) //if has move with winning strategy
     {
         //move made in hasWinning()
-        return 0;
+        return 1;
     }
     else
     {
@@ -37,32 +37,55 @@ int bot::makeMove(board *b)
     }
 }
 
-int bot::hasWinning(board *aBoard)
+int bot::hasWinning(board *b)
 {
-    int A;
-    int B;
-    int C;
-    /*
-    if C > (A XOR B)
+    int A = b->numLeft(0); //max 3 Hearts
+    int B = b->numLeft(1); //max 7
+    int C = b->numLeft(2); //max 5
+    int i = 0;
+
+    if (C > (A ^ B))
     {
-        call function alterBoard to remove enough markers from C to be equal to A XOR B
+        //call function alterBoard to remove enough markers from C to be equal to A XOR B
+        //cout << "C > (A ^ B)" << endl;
+        while (b->numLeft(2) != (A ^ B))
+        {
+            b->alterBoard(2, 1);
+            i++;
+
+        }
+        cout << "Bot is removing " << i << " Spades from the board." << endl;
         return 1;
     }
-    if else B > (A XOR C)
+    else if (B > (A ^ C))
     {
-        call function alterBoard to remove enough markers from B to be equal to A XOR C
+        //call function alterBoard to remove enough markers from B to be equal to A XOR C
+        //cout << "B > (A ^ C)" << endl;
+        while (b->numLeft(1) != (A ^ C))
+        {
+            b->alterBoard(1, 1);
+            i++;
+        }
+        cout << "Bot is removing " << i << " Diamonds from the board." << endl;
         return 1;
     }
-    if else A > (B XOR C)
+    else if (A > (B ^ C))
     {
-        call function alterBoard to remove enough markers from A to be eual to B XOR C
+        //call function alterBoard to remove enough markers from A to be eual to B XOR C
+        //cout << "A > (B ^ C)" << endl;
+        while (b->numLeft(0) != (B ^ C))
+        {
+            b->alterBoard(0, 1);
+            i++;
+        }
+        cout << "Bot is removing " << i << " Hearts from the board." << endl;
         return 1;
     }
-
-
-
-    */
-    return 0;
+    else
+    {
+        //cout << "no winning strat" << endl;
+        return 0;
+    }
 }
 
 int bot::randomFromBoard(board *b)
@@ -71,6 +94,7 @@ int bot::randomFromBoard(board *b)
     int q; //quantity
     int n; //numleft
     int i; //index
+    char* pType;
 
     while (true)
     {
@@ -82,6 +106,23 @@ int bot::randomFromBoard(board *b)
             break;
         }
     }
-    cout << t << " " << q << flush;
+    //cout << t << " " << q << flush;
+    switch (t)
+    {
+    case 0:
+        cout << "Bot is removing " << q << " Hearts from the board." << endl;
+        break;
+    case 1:
+        cout << "Bot is removing " << q << " Diamonds from the board." << endl;
+        break;
+    case 2:
+        cout << "Bot is removing " << q << " Spades from the board." << endl;
+        break;
+
+    default:
+        cout << "unknown" <<endl;
+        exit(1);
+        break;
+    }
     return b->alterBoard(t, q);
 }
