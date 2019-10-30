@@ -4,6 +4,7 @@
 #include "board.h"
 #include "player.h"
 #include "bot.h"
+#include <iostream>
 
 using namespace std;
 
@@ -18,15 +19,28 @@ production::~production()
 
 int production::gameStart()
 {
+    int temp;
     int whoFirst = 0;
     cout << "Welcome to the game!" << endl;
     //user goes on odd num, AI goes on even numbers
-    cout << "Enter '1' if you would like to go first or '0' if you would like the AI to make the first move" << endl;
-    cin >> whoFirst;
-
-    if ((whoFirst > 1) || (whoFirst < 0))
+    int loop = 0;
+    while (loop < 10)
     {
-        cout << "User entered incorrect number" << endl;
+        cout << "Enter '1' if you would like to go first or '0' if you would like the AI to make the first move" << endl;
+        cin >> whoFirst;
+        if ((whoFirst > 1) || (whoFirst < 0))
+        {
+            cout << "You have entered an incorrect number, please try again." << endl;
+            loop++;
+        }
+        else
+        {
+            break;
+        }
+    }
+    if (loop == 10)
+    {
+        cout << "maximum number of attempts reached" << endl;
         exit(1);
     }
 
@@ -54,6 +68,10 @@ int production::gameStart()
             {
                 return 1; //player win
             }
+            cout << endl;
+            cin.ignore();
+            cout << "Press Enter to continue..." << endl;
+            cin.get();
             turn++; //add to turn
             break;
 
@@ -71,6 +89,10 @@ int production::gameStart()
             {
                 return 0; //bot win
             }
+            cout << endl;
+            cin.ignore();
+            cout << "Press Enter to continue..." << endl;
+            cin.get();
             turn++; //add to turn
             break;
 

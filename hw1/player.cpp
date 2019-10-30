@@ -57,8 +57,8 @@ int player::makeMove(board *b)
     {
         cout << "S: " << s << endl; //print number of S, if any
     }
-
-    while (true)
+    int loop = 0;
+    while (loop < 10)
     {
         cout << "Type: ";
         cin >> typeS;
@@ -78,6 +78,7 @@ int player::makeMove(board *b)
         {
             cout << "Type not valid" << endl;
             type = -1;
+            loop++;
         }
 
         if (type != -1)
@@ -91,8 +92,14 @@ int player::makeMove(board *b)
             else
             {
                 cout << "QTY not in range" << endl;
+                loop++;
             }
         }
+    }
+    if(loop == 10)
+    {
+        cout << "maximum number of attemps reached" << endl;
+        exit(1);
     }
 
     return b->alterBoard(type, qty); //alter board
