@@ -19,7 +19,7 @@ production::~production()
 
 int production::gameStart()
 {
-    int whoFirst = 0; //initialize local variables
+    int whoFirst = 0;                       //initialize local variables
     cout << "Welcome to the game!" << endl; //welcome screen
     //users goes on 1, bot goes on 0
     int loop = 0;
@@ -45,10 +45,10 @@ int production::gameStart()
     //initialize board, board pointer, player, and bot
     board b = board();
     board *bp = &b;
-    player aPlayer; 
-    bot aBot;       
+    player aPlayer;
+    bot aBot;
 
-    turn = whoFirst;    //set turn to the proper start
+    turn = whoFirst;  //set turn to the proper start
     int isWinner = 0; //set that there isnt winner
     while (!isWinner) //should run until someone wins
     {
@@ -56,6 +56,8 @@ int production::gameStart()
         {
         case 1:
             cout << "---------PLAYER--------------------" << endl;
+            cout << "Board before: " << endl;
+            cout << endl;
             b.printBoard();            //print board
             if (!aPlayer.makeMove(bp)) //player move error check
             {
@@ -63,6 +65,9 @@ int production::gameStart()
                 exit(1);
                 break;
             }
+            cout << endl;
+            cout << "Board after: " << endl;
+            cout << endl;
             b.printBoard(); //print after move
             if (b.isEmpty()) //check to see if player won
             {
@@ -78,6 +83,8 @@ int production::gameStart()
 
         case 0:
             cout << "---------BOT-----------------------" << endl;
+            cout << "Board before: " << endl;
+            cout << endl;
             b.printBoard();         //print board
             if (!aBot.makeMove(bp)) //bot move error check
             {
@@ -85,16 +92,18 @@ int production::gameStart()
                 exit(1);
                 break;
             }
-            b.printBoard(); //print after
+            cout << endl;
+            cout << "Board after: " << endl;
+            cout << endl;
+            b.printBoard();  //print after
             if (b.isEmpty()) //check to see if bot won
             {
                 return 0; //bot win
             }
-            //way to slow down program for user
             cout << endl;
-            cin.ignore();
             cout << "Press Enter to continue..." << endl;
             cin.get();
+            
             turn++; //add to turn
             break;
 
@@ -104,5 +113,5 @@ int production::gameStart()
             break;
         }
     }
-    return -1; //error would occur for this to return 
+    return -1; //error would occur for this to return
 }

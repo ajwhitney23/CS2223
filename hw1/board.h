@@ -26,8 +26,6 @@ public:
     int alterBoard(int type, int num); //0 for fail alter, 1 for alter pass
     int numLeft(int type);             
     int isEmpty();
-    int typesLeft[3];
-    void updateTypesLeft(int type);
 };
 
 /*

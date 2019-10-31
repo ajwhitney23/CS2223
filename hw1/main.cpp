@@ -10,31 +10,16 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     srand(time(NULL));
-    //testing code for functions... actually main will pretty much be running produciton
-    /*board b;
-    b.printBoard();
-    b.printBoard();
-    b.printBoard();
-    b.printBoard();
-
-    board bo;
-    bo.printBoard();
-    for (int i = 0;i<8;i++){
-        if (!bo.alterBoard(DIA,1)){
-            cout<<"bad move"<<endl;
-        }
-        bo.printBoard();
-
-    }*/
+    //create production
     production p;
-    if (p.gameStart())
+    if (p.gameStart()) //start game if games returns 1 player wins else bot wins
     {
+        cout << "Bot: you have defeated me, I will not let this happen again!" << endl;
         cout << "Player WINS!" << endl;
     }
     else
     {
+        cout << "Bot: HAHA I have beaten you, better luck next time!" << endl;
         cout << "Bot WINS!" << endl;
     }
-
-    //call production to start / run game
 }
