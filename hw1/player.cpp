@@ -15,18 +15,18 @@ player::~player()
 
 int player::makeMove(board *b)
 {
-    int type; //type to be flipped
-    char typeS; //type in string format
-    int qty; //number to be flipped
+    int type;     //type to be flipped
+    string typeS; //type in string format
+    int qty;      //number to be flipped
     //number of hearts, diamonds, spades
-    int h = b->numLeft(HEA); 
+    int h = b->numLeft(HEA);
     int d = b->numLeft(DIA);
     int s = b->numLeft(SPA);
-    
+
     //ask user what they would like to do
     cout << "Enter type and quantity\nValid types and max quantity are:" << endl;
     //each if checks if there are still moves available for the item
-    if (h) 
+    if (h)
     {
         cout << "H: " << h << endl; //print number of H, if any
     }
@@ -44,21 +44,23 @@ int player::makeMove(board *b)
     {
         cout << "Type: ";
         cin >> typeS;
-        if (typeS == 'H')
+        cin.clear();
+        if (typeS == "H")
         {
             type = 0;
         }
-        else if (typeS == 'D')
+        else if (typeS == "D")
         {
             type = 1;
         }
-        else if (typeS == 'S')
+        else if (typeS == "S")
         {
             type = 2;
         }
         else
         {
             cout << "Type not valid" << endl;
+            typeS = "";
             type = -1;
             loop++;
         }
@@ -74,11 +76,12 @@ int player::makeMove(board *b)
             else
             {
                 cout << "QTY not in range" << endl;
+                qty = -1;
                 loop++;
             }
         }
     }
-    if(loop == 10)
+    if (loop == 10)
     {
         cout << "maximum number of attemps reached" << endl;
         exit(1);
