@@ -17,7 +17,9 @@ bot::bot()
 bot::~bot()
 {
 }
-
+/*
+function makes move for the bot
+*/
 int bot::makeMove(board *b)
 {
     int type;
@@ -31,12 +33,12 @@ int bot::makeMove(board *b)
     }
     else
     {
-        //type = randomFromArray(b->typesLeft);
-        //qty = rand(b->numLeft(type));
         return randomFromBoard(b);
     }
 }
-
+/*
+if there is a winning position on the board
+*/
 int bot::hasWinning(board *b)
 {
     int A = b->numLeft(0); //max 3 Hearts
@@ -87,7 +89,9 @@ int bot::hasWinning(board *b)
         return 0;
     }
 }
-
+/*
+selects random types nad quantity to flip
+*/
 int bot::randomFromBoard(board *b)
 {
     int t; //type
