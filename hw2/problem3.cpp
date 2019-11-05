@@ -11,8 +11,10 @@
 using namespace std;
 int printed;
 clock_t t;
+double current;
+double last;
 
-long int p2(int n)
+long int lucas(int n)
 //need to check if >0 for inital n
 {
     if (n == 0)
@@ -20,7 +22,7 @@ long int p2(int n)
         if (n == printed)
         {
             cout << n << ": " << 2 << endl;
-            cout << "time: " << ((double)(clock() - t)/CLOCKS_PER_SEC) << endl;
+            cout << "time: " << (current = ((double)(clock() - t)/CLOCKS_PER_SEC)) << endl;
             cout << endl;
             printed++;
         }
@@ -31,7 +33,7 @@ long int p2(int n)
         if (n == printed)
         {
             cout << n << ": " << 1 << endl;
-            cout << "time: " << ((double)(clock() - t)/CLOCKS_PER_SEC) << endl;
+            cout << "time: " << (current = ((double)(clock() - t)/CLOCKS_PER_SEC)) << endl;
             cout << endl;
             printed++;
         }
@@ -39,11 +41,11 @@ long int p2(int n)
     }
     else
     {
-        long int r = p2(n - 1) + p2(n - 2);
+        long int r = lucas(n - 1) + lucas(n - 2);
         if (n == printed)
         {
             cout << n << ": " << r << endl;
-            cout << "time: " << ((double)(clock() - t)/CLOCKS_PER_SEC) << endl;
+            cout << "time: " << (current = ((double)(clock() - t)/CLOCKS_PER_SEC)) << endl;
             cout << endl;
             printed++;
         }
@@ -62,9 +64,9 @@ int main(int argc, char *argv[])
     int max = atoi(argv[1]);
     printed = 0;
     t = clock();
-    int r = p2(max);
+    int r = lucas(max);
     cout << max - 1 << ": " << r << endl;
-    cout << "time: " << ((double)(clock() - t)/CLOCKS_PER_SEC) << endl;
+    cout << "time: " << (current = ((double)(clock() - t)/CLOCKS_PER_SEC)) << endl;
     /*
     for (int i = 0; i < max; i++)
     {
