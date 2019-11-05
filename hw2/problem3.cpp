@@ -11,10 +11,10 @@
 using namespace std;
 int printed;
 clock_t t;
-double current;
-double last;
+double current = 0;
+double last = -1;
 
-long int lucas(int n)
+unsigned long int lucas(int n)
 //need to check if >0 for inital n
 {
     if (n == 0)
@@ -22,8 +22,11 @@ long int lucas(int n)
         if (n == printed)
         {
             cout << n << ": " << 2 << endl;
-            cout << "time: " << (current = ((double)(clock() - t)/CLOCKS_PER_SEC)) << endl;
+            cout << "time: " << (current = ((double)(clock() - t) / CLOCKS_PER_SEC)) << endl;
+            cout << "ratio: " << (current / last) << endl;
+            last = current;
             cout << endl;
+
             printed++;
         }
         return 2;
@@ -33,8 +36,10 @@ long int lucas(int n)
         if (n == printed)
         {
             cout << n << ": " << 1 << endl;
-            cout << "time: " << (current = ((double)(clock() - t)/CLOCKS_PER_SEC)) << endl;
+            cout << "time: " << (current = ((double)(clock() - t) / CLOCKS_PER_SEC)) << endl;
+            cout << "ratio: " << (current / last) << endl;
             cout << endl;
+            last = current;
             printed++;
         }
         return 1;
@@ -45,8 +50,10 @@ long int lucas(int n)
         if (n == printed)
         {
             cout << n << ": " << r << endl;
-            cout << "time: " << (current = ((double)(clock() - t)/CLOCKS_PER_SEC)) << endl;
+            cout << "time: " << (current = ((double)(clock() - t) / CLOCKS_PER_SEC)) << endl;
+            cout << "ratio: " << (current / last) << endl;
             cout << endl;
+            last = current;
             printed++;
         }
 
@@ -64,9 +71,10 @@ int main(int argc, char *argv[])
     int max = atoi(argv[1]);
     printed = 0;
     t = clock();
-    int r = lucas(max);
+    unsigned long int r = lucas(max);
     cout << max - 1 << ": " << r << endl;
-    cout << "time: " << (current = ((double)(clock() - t)/CLOCKS_PER_SEC)) << endl;
+    cout << "time: " << (current = ((double)(clock() - t) / CLOCKS_PER_SEC)) << endl;
+    cout << "ratio: " << (current / last) << endl;
     /*
     for (int i = 0; i < max; i++)
     {
