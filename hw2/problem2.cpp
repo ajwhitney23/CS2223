@@ -5,6 +5,7 @@
  * call recursive function
  */
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 int printed;
