@@ -11,6 +11,7 @@ using namespace std;
 int printed;
 
 long int p2(int n)
+//need to check if >0 for inital n
 {
     if (n == 0)
     {
