@@ -1,0 +1,2 @@
+The ratio is approaching the golden ratio(1.618)
+The order of growth is: 
