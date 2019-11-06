@@ -7,7 +7,11 @@
 using namespace std;
 
 //global variables
-int grid[4][4] = {{1, 14, 14, 4}, {11, 7, 6, 9}, {8, 10, 10, 5}, {13, 2, 3, 15}};
+//      [r][c]
+int grid[4][4] = {{1, 14, 14, 4},
+                  {11, 7, 6, 9},
+                  {8, 10, 10, 5},
+                  {13, 2, 3, 15}};
 /*
 int sumRow1 = 0;
 int sumRow2 = 0;
@@ -34,6 +38,21 @@ int is33(int array[4])
         isEqual = 1;
     }
     return isEqual;
+}
+
+int parseGride()
+{
+    int i;
+    int j;
+    //select 4 elements systematically
+        //is33(thatArray);
+    for(i = 0; i < 4; i++)
+    {
+        for(j = 0; j < 4; j++)
+        {
+            
+        }
+    }
 }
 
 int main(int argc, int **argv)
