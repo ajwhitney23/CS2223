@@ -12,6 +12,7 @@ int grid[4][4] = {{1, 14, 14, 4},
                   {11, 7, 6, 9},
                   {8, 10, 10, 5},
                   {13, 2, 3, 15}};
+int list[16] = {1, 14, 14, 4, 11, 7, 6, 9, 8, 10, 10, 5, 13, 2, 3, 15};
 /*
 int sumRow1 = 0;
 int sumRow2 = 0;
@@ -40,23 +41,35 @@ int is33(int array[4])
     return isEqual;
 }
 
-int parseGride()
+int comb(int printFlag)
 {
-    int i;
-    int j;
-    //select 4 elements systematically
-        //is33(thatArray);
-    for(i = 0; i < 4; i++)
+    int acc = 0;
+    for (int i = 0; i < 13; i++)
     {
-        for(j = 0; j < 4; j++)
+        for (int j = i + 1; j < 14; j++)
         {
-            
+            for (int k = j + 1; k < 15; k++)
+            {
+                for (int l = k + 1; l < 16; l++)
+                {
+                    if ((list[i] + list[j] + list[k] + list[l]) == 33)
+                    {
+                        if (printFlag)
+                        {
+                            printf("index: i, %2i | j, %2i | k, %2i | l,%2i \n", i, j, k, l);
+                            printf("value: i, %2i | j, %2i | k, %2i | l,%2i \t(%2i)\n\n", list[i], list[j], list[k], list[l], (list[i] + list[j] + list[k] + list[l]));
+                        }
+                        acc++;
+                    }
+                }
+            }
         }
     }
+    return acc;
 }
-
-int main(int argc, int **argv)
+int main(int argc, char *argv[])
 {
+    cout << comb(1) << endl;
     /*
     Initialize sums
     */
