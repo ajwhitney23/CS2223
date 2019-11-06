@@ -20,6 +20,9 @@ int sumCol4 = 0;
 
 int main (int argc, int **argv)
 {
+    /*
+    Initialize sums
+    */
     int i;
     for(i = 0; i < 4; i++)
     {
@@ -33,4 +36,7 @@ int main (int argc, int **argv)
     sumCol3 = row1[2] + row2[2] + row3[2] + row4[2];
     sumCol4 = row1[3] + row2[3] + row3[3] + row4[3];
     
+    
+
+
 }
