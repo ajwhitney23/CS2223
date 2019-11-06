@@ -5,6 +5,8 @@
 //https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
 
 using namespace std;
+
+//global variables
 int row1[4] = {1, 14, 14, 4};
 int row2[4] = {11, 7, 6, 9};
 int row3[4] = {8, 10, 10, 5};
@@ -18,6 +20,7 @@ int sumCol2 = 0;
 int sumCol3 = 0;
 int sumCol4 = 0;
 
+//compares if any array is equal to 33
 int is33(int array[4])
 {
     int i;
@@ -54,4 +57,5 @@ int main(int argc, int **argv)
     sumCol2 = row1[1] + row2[1] + row3[1] + row4[1];
     sumCol3 = row1[2] + row2[2] + row3[2] + row4[2];
     sumCol4 = row1[3] + row2[3] + row3[3] + row4[3];
+    
 }
