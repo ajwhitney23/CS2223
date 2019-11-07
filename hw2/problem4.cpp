@@ -59,7 +59,7 @@ int comb4(int printFlag)
     }
     return acc;
 }
-
+/*
 int combN(int maxDepth, int cDepth, int indexPrev, int sumPrev, int compare)
 {
     int acc = 0;
@@ -83,36 +83,24 @@ int combN(int maxDepth, int cDepth, int indexPrev, int sumPrev, int compare)
     }
     return acc;
 }
+*/
 
-void countSums(int numElements)
+void combN(int maxDepth, int cDepth, int indexPrev, int sumPrev)
 {
-    switch (numElements)
+    if (maxDepth == cDepth)
     {
-    case 0:
-        //0 elements, sum is 0
-        break;
-    case 1:
-        for (int i = 0; i < 16; i++)
+        for (int i = indexPrev; i < 16; i++)
         {
-            int temp = sumTotal[i];
-            temp = temp + 1;
-            sumTotal[i] = temp;
+            int sum = sumPrev + list[i];
+            sumTotal[sum]++;
         }
-        break;
-    case 2:
-        for (int i = 0; i < 15; i++)
+    }
+    else
+    {
+        for (int i = indexPrev; i < (16 - (maxDepth - (cDepth + 1))); i++)
         {
-            for (int j = 0; j < 16; j++)
-            {
-                int temp = sumTotal[i + j];
-                temp = temp + 1;
-                sumTotal[i + j] = temp;
-            }
+            combN(maxDepth, 1 + cDepth, i + 1, (sumPrev + list[i]));
         }
-    default:
-        cout << "error" << endl;
-        exit(1);
-        break;
     }
 }
 
@@ -123,6 +111,7 @@ int main(int argc, char *argv[])
     {
         sumTotal[i] = 0;
     }
+    sumTotal[0]++;
     /*
     if (atoi(argv[1]) == 1)
     {
@@ -148,8 +137,25 @@ int main(int argc, char *argv[])
         //p 4
     }
     */
-    cout << "Number of 4-element combinations that equal 33: " << combN(4, 0, 0, 0, 33) << endl
+    //part 1
+    cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
          << endl;
+
+    //part 2/3
+    for (i = 0; i < 16; i++)
+    {
+        combN(i, 0, 0, 0);
+    }
+    cout << "all combinations that equal 33 " << sumTotal[33] << endl
+         << endl;
+
+    int w = 0;
+    for (w = 0; w < 133; w++)
+    {
+        //cout << w << " " << sumTotal[w] << endl;
+        cout << sumTotal[w] << " combinations of elements sums to " << w << endl;
+    }
+
     //cout << "Proof of 4-element combinations: " << endl;
     //cout << comb4(1) << endl;
     //testing below
