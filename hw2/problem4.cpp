@@ -14,16 +14,7 @@ int grid[4][4] = {{1, 14, 14, 4},
                   {8, 10, 10, 5},
                   {13, 2, 3, 15}};
 int list[16] = {1, 14, 14, 4, 11, 7, 6, 9, 8, 10, 10, 5, 13, 2, 3, 15};
-/*
-int sumRow1 = 0;
-int sumRow2 = 0;
-int sumRow3 = 0;
-int sumRow4 = 0;
-int sumCol1 = 0;
-int sumCol2 = 0;
-int sumCol3 = 0;
-int sumCol4 = 0;
-*/
+int sumTotal[133]; //{0, 4, 1} would mean the sum was 0 0 times, 1 4 times, and 2 1 time...
 
 //compares if any array is equal to 33
 int is33(int array[4])
@@ -42,7 +33,7 @@ int is33(int array[4])
     return isEqual;
 }
 
-int comb(int printFlag)
+int comb4(int printFlag)
 {
     int acc = 0;
     for (int i = 0; i < 13; i++)
@@ -68,11 +59,78 @@ int comb(int printFlag)
     }
     return acc;
 }
+
+void countSums(int numElements)
+{
+    switch (numElements)
+    {
+    case 0:
+        //0 elements, sum is 0
+        break;
+    case 1:
+        for (int i = 0; i < 16; i++)
+        {
+            int temp = sumTotal[i];
+            temp = temp + 1;
+            sumTotal[i] = temp;
+        }
+        break;
+    case 2:
+        for (int i = 0; i < 15; i++)
+        {
+            for (int j = 0; j < 16; j++)
+            {
+                int temp = sumTotal[i + j];
+                temp = temp + 1;
+                sumTotal[i + j] = temp;
+            }
+        }
+    default:
+        cout << "error" << endl;
+        exit(1);
+        break;
+    }
+}
+
 int main(int argc, char *argv[])
 {
-    cout << "Number of 4-element combinations that equal 33: " << comb(0) << endl << endl;
+    int i = 0;
+    for (i = 0; i < 133; i++)
+    {
+        sumTotal[i] = 0;
+    }
+    /*
+    if (atoi(argv[1]) == 1)
+    {
+        cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
+             << endl;
+        cout << "Proof of 4-element combinations: " << endl;
+        cout << comb4(1) << endl;
+    }
+    if ((atoi(argv[1]) == 2) || (atoi(argv[1]) == 3))
+    {
+        //part 2/3
+    }
+    else
+    {
+        //part1
+        cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
+             << endl;
+        cout << "Proof of 4-element combinations: " << endl;
+        cout << comb4(1) << endl;
+        //p 2/3
+        countSums(1);
+        cout << sumTotal[1] << endl;
+        //p 4
+    }
+    */
+    cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
+         << endl;
     cout << "Proof of 4-element combinations: " << endl;
-    cout << comb(1) << endl;
+    cout << comb4(1) << endl;
+    //testing below
+    countSums(1);
+    cout << sumTotal[100]  << endl;
     /*
     Initialize sums
     */
