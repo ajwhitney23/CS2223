@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <stdio.h>
 #include <time.h>
 
 //https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
@@ -69,6 +70,8 @@ int comb(int printFlag)
 }
 int main(int argc, char *argv[])
 {
+    cout << "Number of 4-element combinations that equal 33: " << comb(0) << endl << endl;
+    cout << "Proof of 4-element combinations: " << endl;
     cout << comb(1) << endl;
     /*
     Initialize sums
