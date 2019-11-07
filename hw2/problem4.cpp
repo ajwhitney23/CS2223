@@ -112,81 +112,106 @@ int main(int argc, char *argv[])
         sumTotal[i] = 0;
     }
     sumTotal[0]++;
-    /*
-    if (atoi(argv[1]) == 1)
-    {
-        cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
-             << endl;
-        cout << "Proof of 4-element combinations: " << endl;
-        cout << comb4(1) << endl;
-    }
-    if ((atoi(argv[1]) == 2) || (atoi(argv[1]) == 3))
-    {
-        //part 2/3
-    }
-    else
-    {
-        //part1
-        cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
-             << endl;
-        cout << "Proof of 4-element combinations: " << endl;
-        cout << comb4(1) << endl;
-        //p 2/3
-        countSums(1);
-        cout << sumTotal[1] << endl;
-        //p 4
-    }
-    */
-    //part 1
-    cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
-         << endl;
 
-    //part 2/3
     for (i = 0; i < 16; i++)
     {
         combN(i, 0, 0, 0);
     }
-    cout << "all combinations that equal 33 " << sumTotal[33] << endl
-         << endl;
 
-    int w = 0;
-    for (w = 0; w < 133; w++)
+    if (argc > 1)
     {
-        //cout << w << " " << sumTotal[w] << endl;
-        cout << sumTotal[w] << " combinations of elements sums to " << w << endl;
-    }
 
-    //cout << "Proof of 4-element combinations: " << endl;
-    //cout << comb4(1) << endl;
-    //testing below
-
-    /*
-    for (int i = 0; i < 132; i++)
-    {
-        int t = combN(16, 0, 0, 0, i);
-        if (t != 0)
+        switch ((atoi(argv[1])))
         {
-            cout << "sum,depth: " << i << ", " << 16 << "\ntotal: " << t << endl;
+        case 1:
+            cout << endl
+                 << "-------4.1-------" << endl
+                 << endl
+                 << endl;
+            cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
+                 << endl;
+            cout << "Proof: " << endl;
+            cout << comb4(1) << endl;
+            break;
+
+        case 2:
+            cout << endl
+                 << "-------4.2-------" << endl
+                 << endl
+                 << endl;
+            cout << "All combinations that equal 33: " << sumTotal[33] << endl
+                 << endl;
+            break;
+
+        case 3:
+            cout << endl
+                 << "-------4.3-------" << endl
+                 << endl
+                 << endl;
+            for (int w = 0; w < 133; w++)
+            {
+                //cout << w << " " << sumTotal[w] << endl;
+                cout << sumTotal[w] << " combinations of different elements sum to " << w << endl;
+            }
+            break;
+
+        case 4:
+            //stuff
+            break;
+
+        default:
+            cout << endl
+                 << "-------4.1-------" << endl
+                 << endl
+                 << endl;
+            cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
+                 << endl;
+            cout << "Proof: " << endl;
+            cout << comb4(1) << endl;
+
+            cout << endl
+                 << "-------4.2-------" << endl
+                 << endl
+                 << endl;
+            cout << "All combinations that equal 33: " << sumTotal[33] << endl
+                 << endl;
+            cout << endl
+                 << "-------4.3-------" << endl
+                 << endl
+                 << endl;
+            for (int w = 0; w < 133; w++)
+            {
+                //cout << w << " " << sumTotal[w] << endl;
+                cout << sumTotal[w] << " combinations of different elements sum to " << w << endl;
+            }
+            break;
         }
     }
-    */
-
-    /*
-    Initialize sums
-    */
-
-    /*int i;
-    int temp = 0;
-    for (i = 0; i < 4; i++)
+    else
     {
-        sumRow1 = sumRow1 + grid[0][i];
-        sumRow2 = sumRow2 + row2[i];
-        sumRow3 = sumRow3 + row3[i];
-        sumRow4 = sumRow4 + row4[i];
+        cout << endl
+             << "-------4.1-------" << endl
+             << endl
+             << endl;
+        cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
+             << endl;
+        cout << "Proof: " << endl;
+        cout << comb4(1) << endl;
+
+        cout << endl
+             << "-------4.2-------" << endl
+             << endl
+             << endl;
+        cout << "All combinations that equal 33: " << sumTotal[33] << endl
+             << endl;
+        cout << endl
+             << "-------4.3-------" << endl
+             << endl
+             << endl;
+        for (int w = 0; w < 133; w++)
+        {
+            //cout << w << " " << sumTotal[w] << endl;
+            cout << sumTotal[w] << " combinations of different elements sum to " << w << endl;
+        }
     }
-    sumCol1 = row1[0] + row2[0] + row3[0] + row4[0];
-    sumCol2 = row1[1] + row2[1] + row3[1] + row4[1];
-    sumCol3 = row1[2] + row2[2] + row3[2] + row4[2];
-    sumCol4 = row1[3] + row2[3] + row3[3] + row4[3];
-    */
 }
