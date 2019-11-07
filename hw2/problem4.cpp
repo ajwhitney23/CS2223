@@ -60,6 +60,30 @@ int comb4(int printFlag)
     return acc;
 }
 
+int combN(int maxDepth, int cDepth, int indexPrev, int sumPrev, int compare)
+{
+    int acc = 0;
+    if (maxDepth == cDepth)
+    {
+        for (int i = indexPrev; i < 16; i++)
+        {
+            if (sumPrev + list[i] == compare)
+            {
+                printf("%2i %2i %2i %2i\n", cDepth, indexPrev, sumPrev, compare);
+                acc++;
+            }
+        }
+    }
+    else
+    {
+        for (int i = indexPrev; i < (16 - (maxDepth - cDepth)); i++)
+        {
+            acc += combN(maxDepth, 1 + cDepth, i, (sumPrev + list[i]), compare);
+        }
+    }
+    return acc;
+}
+
 void countSums(int numElements)
 {
     switch (numElements)
@@ -124,13 +148,23 @@ int main(int argc, char *argv[])
         //p 4
     }
     */
-    cout << "Number of 4-element combinations that equal 33: " << comb4(0) << endl
+    cout << "Number of 4-element combinations that equal 33: " << combN(4, 0, 0, 0, 33) << endl
          << endl;
-    cout << "Proof of 4-element combinations: " << endl;
-    cout << comb4(1) << endl;
+    //cout << "Proof of 4-element combinations: " << endl;
+    //cout << comb4(1) << endl;
     //testing below
-    countSums(1);
-    cout << sumTotal[100]  << endl;
+
+    /*
+    for (int i = 0; i < 132; i++)
+    {
+        int t = combN(16, 0, 0, 0, i);
+        if (t != 0)
+        {
+            cout << "sum,depth: " << i << ", " << 16 << "\ntotal: " << t << endl;
+        }
+    }
+    */
+
     /*
     Initialize sums
     */
