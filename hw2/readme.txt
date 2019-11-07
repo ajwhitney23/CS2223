@@ -1,12 +1,11 @@
-http://discrete.openmathbooks.org/dmoi3/sec_recurrence.html
+http://discrete.openmathbooks.org/dmoi3/sec_recurrence.html <-- source help for problem 1
 
 ---PROGRAM MUST BE RUN ON LINUX/MAC---
 
 ---DIRECTIONS FOR USE---
 
 ---COMPILE INSTRUCTIONS---
-open terminal in the directory this readme is located,
-which at a minimum must contain:
+open terminal in the directory this readme is located.
 
 Run 'make' to build the application
 Run 'make p2' to buld only the part2 executable
@@ -31,3 +30,6 @@ Options for subpart:
     2 - show results for 4.2
     3 - show results for 4.3
     4 - show results for 4.4
+
+-----NOTES------
+there is a text file called prob3.txt that answers the questions for 3.2
