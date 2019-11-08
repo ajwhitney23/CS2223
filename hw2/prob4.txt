@@ -1,2 +1,2 @@
 4.4 - 66 can be created with 1364 combinations.  This is interesting because 66 is exactly double of 33.
-also the curve for the growth in number of combinations if graphed, would be an upside down parabala.
+also the growth appears to be a bellcurve.
