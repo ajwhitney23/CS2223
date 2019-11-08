@@ -15,6 +15,8 @@ int grid[4][4] = {{1, 14, 14, 4},
                   {13, 2, 3, 15}};
 int list[16] = {1, 14, 14, 4, 11, 7, 6, 9, 8, 10, 10, 5, 13, 2, 3, 15};
 int sumTotal[133]; //{0, 4, 1} would mean the sum was 0 0 times, 1 4 times, and 2 1 time...
+int nComTotal[133]; // {0, 4, 1} would mean there are 0 n-element combinations that equal 0, 4 that equal 1, 1 that equal 2
+ 
 
 //compares if any array is equal to 33
 int is33(int array[4])
