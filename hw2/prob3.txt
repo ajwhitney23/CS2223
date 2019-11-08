@@ -1,2 +1,2 @@
 The ratio is approaching the golden ratio(1.618)
-The order of growth is: 
+The order of growth is: O(2^n)

@@ -14,9 +14,8 @@ int grid[4][4] = {{1, 14, 14, 4},
                   {8, 10, 10, 5},
                   {13, 2, 3, 15}};
 int list[16] = {1, 14, 14, 4, 11, 7, 6, 9, 8, 10, 10, 5, 13, 2, 3, 15};
-int sumTotal[133]; //{0, 4, 1} would mean the sum was 0 0 times, 1 4 times, and 2 1 time...
+int sumTotal[133];  //{0, 4, 1} would mean the sum was 0 0 times, 1 4 times, and 2 1 time...
 int nComTotal[133]; // {0, 4, 1} would mean there are 0 n-element combinations that equal 0, 4 that equal 1, 1 that equal 2
- 
 
 //compares if any array is equal to 33
 int is33(int array[4])
@@ -61,31 +60,6 @@ int comb4(int printFlag)
     }
     return acc;
 }
-/*
-int combN(int maxDepth, int cDepth, int indexPrev, int sumPrev, int compare)
-{
-    int acc = 0;
-    if (maxDepth == cDepth)
-    {
-        for (int i = indexPrev; i < 16; i++)
-        {
-            if (sumPrev + list[i] == compare)
-            {
-                printf("%2i %2i %2i %2i\n", cDepth, indexPrev, sumPrev, compare);
-                acc++;
-            }
-        }
-    }
-    else
-    {
-        for (int i = indexPrev; i < (16 - (maxDepth - cDepth)); i++)
-        {
-            acc += combN(maxDepth, 1 + cDepth, i, (sumPrev + list[i]), compare);
-        }
-    }
-    return acc;
-}
-*/
 
 void combN(int maxDepth, int cDepth, int indexPrev, int sumPrev)
 {
@@ -155,10 +129,6 @@ int main(int argc, char *argv[])
                 //cout << w << " " << sumTotal[w] << endl;
                 cout << sumTotal[w] << " combinations of different elements sum to " << w << endl;
             }
-            break;
-
-        case 4:
-            //stuff
             break;
 
         default:

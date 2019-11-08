@@ -29,7 +29,7 @@ Options for subpart:
     1 - show results for 4.1
     2 - show results for 4.2
     3 - show results for 4.3
-    4 - show results for 4.4
 
 -----NOTES------
 there is a text file called prob3.txt that answers the questions for 3.2
+there is a text file called prob4.txt that answers the questions for 4.4
