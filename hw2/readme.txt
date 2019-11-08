@@ -33,3 +33,4 @@ Options for subpart:
 -----NOTES------
 there is a text file called prob3.txt that answers the questions for 3.2
 there is a text file called prob4.txt that answers the questions for 4.4
+console output.pdf is for problem 2
