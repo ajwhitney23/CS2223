@@ -21,6 +21,7 @@ unsigned long int lucas(int n)
     {
         if (n == printed)
         {
+            //this is for printing values
             cout << n << ": " << 2 << endl;
             cout << "time: " << (current = ((double)(clock() - t) / CLOCKS_PER_SEC)) << endl;
             cout << "ratio: " << (current / last) << endl;
@@ -29,12 +30,13 @@ unsigned long int lucas(int n)
 
             printed++;
         }
-        return 2;
+        return 2; //base case R(0)
     }
     else if (n == 1)
     {
         if (n == printed)
         {
+            //this is for printing values
             cout << n << ": " << 1 << endl;
             cout << "time: " << (current = ((double)(clock() - t) / CLOCKS_PER_SEC)) << endl;
             cout << "ratio: " << (current / last) << endl;
@@ -42,13 +44,14 @@ unsigned long int lucas(int n)
             last = current;
             printed++;
         }
-        return 1;
+        return 1; //base case R(1)
     }
     else
     {
-        long int r = lucas(n - 1) + lucas(n - 2);
+        long int r = lucas(n - 1) + lucas(n - 2); //recurse
         if (n == printed)
         {
+            //this is for printing values
             cout << n << ": " << r << endl;
             cout << "time: " << (current = ((double)(clock() - t) / CLOCKS_PER_SEC)) << endl;
             cout << "ratio: " << (current / last) << endl;
@@ -57,7 +60,7 @@ unsigned long int lucas(int n)
             printed++;
         }
 
-        return r;
+        return r; //step out
     }
 }
 
@@ -65,20 +68,14 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        cout << "./p3 [number to run]" << endl;
+        cout << "./p3 [number to run]" << endl; //useage
         exit(1);
     }
-    int max = atoi(argv[1]);
-    printed = 0;
-    t = clock();
+    int max = atoi(argv[1]); //max value from command line
+    printed = 0;             //used in printing numbers
+    t = clock();             //used in time calculation
     unsigned long int r = lucas(max);
     cout << max - 1 << ": " << r << endl;
     cout << "time: " << (current = ((double)(clock() - t) / CLOCKS_PER_SEC)) << endl;
     cout << "ratio: " << (current / last) << endl;
-    /*
-    for (int i = 0; i < max; i++)
-    {
-        cout << i << ": " << p2(i) << endl;
-    }
-    */
 }
