@@ -6,7 +6,7 @@ using namespace std;
 
 string stripInput(string input)
 {
-    string punc = "! .,;:";
+    string punc = "! .,;:/";
     for_each(input.begin(), input.end(), [](char &c) {
         c = tolower(c);
     });
