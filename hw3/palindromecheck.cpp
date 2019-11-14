@@ -23,6 +23,7 @@ void stripInput(string input)
 
 int isPalindrome(string input)
 {
+    stripInput(input);
     /*
     check if beginning and end are equal
     check if beginning + 1 and end - 1 are equal... contintue until done
@@ -35,7 +36,14 @@ int isPalindrome(string input)
 int main(int agrc, char **argv)
 {
     //string input = argv[1];
-    stripInput(".!A:B: C:.,!");
+    if(isPalindrome(argv[1]))
+    {
+        cout << "It is a palindrome" << endl;
+    }
+    else 
+    {
+        cout << "It is not a palindrome" << endl;
+    }
     
     return 0;
 }
