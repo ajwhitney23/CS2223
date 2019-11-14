@@ -4,10 +4,7 @@
 #include <string>
 using namespace std;
 
-char reverse[256];
-
-
-void stripInput(string input)
+string stripInput(string input)
 {
     string punc = "! .,;:";
     for_each(input.begin(), input.end(), [](char & c)
@@ -19,11 +16,22 @@ void stripInput(string input)
     }
 
     cout << input << endl;
+    return input;
 }
 
 int isPalindrome(string input)
-{
-    stripInput(input);
+{ 
+    int i = 0;
+    string aString = stripInput(input);
+    for(i = 0; i < aString.length() - 1; i++);
+    {
+        if(aString.at(i) != aString.at(aString.length() - i - 1)){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+    }
     /*
     check if beginning and end are equal
     check if beginning + 1 and end - 1 are equal... contintue until done
@@ -35,8 +43,8 @@ int isPalindrome(string input)
 
 int main(int agrc, char **argv)
 {
-    //string input = argv[1];
-    if(isPalindrome(argv[1]))
+    string input = argv[1];
+    if(isPalindrome(input))
     {
         cout << "It is a palindrome" << endl;
     }
