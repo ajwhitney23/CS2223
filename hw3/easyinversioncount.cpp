@@ -18,6 +18,7 @@ void bubblesort(int arrayLength)
         swapped = 0;
         for (j = 1; j < arrayLength; j++)
         {
+            //less than or equal is no swap, making it stable
             if (initial[j] > initial[j + 1])
             {
                 temp = initial[j + 1];
@@ -54,10 +55,6 @@ int main(int argc, char **argv)
         initial[j] = atoi(argv[j]);
     }
     initial[argc] = 999999;
-    /*
-    initial[argc] = '/0';
-    sorted[argc] = '/0';
-    */
     printArray(initial, argc);
     bubblesort(argc);
     printArray(initial, argc);
