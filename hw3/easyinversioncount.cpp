@@ -13,6 +13,7 @@ void bubblesort(int arrayLength)
     int swapped = 0;
     int temp;
     int temp2;
+    int numInv;
     for (i = 1; i < arrayLength; i++)
     {
         swapped = 0;
@@ -26,6 +27,7 @@ void bubblesort(int arrayLength)
                 initial[j] = temp;
                 initial[j + 1] = temp2;
                 swapped = 1;
+                numInv++;
             }
         }
         if(!swapped)
@@ -33,6 +35,7 @@ void bubblesort(int arrayLength)
             break;
         }
     }
+    cout << "numer of inversions: " << numInv << endl;
 }
 
 void printArray(int array[], int arrayLength)
