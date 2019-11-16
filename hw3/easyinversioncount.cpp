@@ -53,6 +53,7 @@ int main(int argc, char **argv)
     {
         initial[j] = atoi(argv[j]);
     }
+    initial[argc] = 999999;
     /*
     initial[argc] = '/0';
     sorted[argc] = '/0';
