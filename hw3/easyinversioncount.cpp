@@ -35,7 +35,7 @@ void bubblesort(int arrayLength)
             break;
         }
     }
-    cout << "numer of inversions: " << numInv << endl;
+    cout << "Number of inversions: " << numInv << endl;
 }
 
 void printArray(int array[], int arrayLength)
@@ -58,8 +58,10 @@ int main(int argc, char **argv)
         initial[j] = atoi(argv[j]);
     }
     initial[argc] = 999999;
+    cout << "Intial array: ";
     printArray(initial, argc);
     bubblesort(argc);
+    cout << "Sorted array: ";
     printArray(initial, argc);
     
 }
