@@ -72,6 +72,7 @@ void printArray(int array[], int arrayLength)
 
 int main(int argc, char **argv)
 {
+    srand(time(NULL));
     if (argc == 1)
     {
         cout << "Inversions: " << mergeSort(standard, 0, 9) << endl;
