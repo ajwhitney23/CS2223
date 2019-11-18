@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+int standard[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+
 int merge(int array[], int left, int mid, int right)
 {
     int n1 = (mid + 1) - left; //left array stop point
@@ -19,7 +21,7 @@ int merge(int array[], int left, int mid, int right)
 
     int i = 0, j = 0, k = 0; //indexes for i,j in L,R and k for kount :)
     int n = left;            //keep track of array position we're merging into
-    while (i < n1 && j < n2)
+    for (; i < n1 && j < n2; n++)
     {
         if (L[i] <= R[j])
         {
@@ -33,7 +35,6 @@ int merge(int array[], int left, int mid, int right)
             k++;
         }
     }
-
     for (; i < n1; i++, n++)
     {
         array[n] = L[i]; //merge rest of array
@@ -69,14 +70,34 @@ void printArray(int array[], int arrayLength)
 
 int main(int argc, char **argv)
 {
-    int array[argc - 1];
-    for (int i = 0; i < argc - 1; i++)
+    if (argc == 1)
     {
-        array[i] = atoi(argv[i + 1]);
+        cout << "Inversions: " << mergeSort(standard, 0, 9) << endl;
     }
-    cout << "Intial array: ";
-    printArray(array, argc - 1);
-    cout << "Inversions: " << mergeSort(array, 0, argc - 1) << endl;
-    cout << "Sorted array: ";
-    printArray(array, argc - 1);
+    else if (argc == 2 || argc == 3)
+    {
+        int n = atoi(argv[1]);
+        int array[n];
+        for (int i = 0; i < n; i++)
+        {
+            array[i] = ((rand() % n) * (rand() % n)) + 1;
+        }
+        if (argc == 3)
+        {
+            cout << "Intial array: " << endl;
+            printArray(array, n - 1);
+            cout << "Inversions: " << mergeSort(array, 0, n - 1) << endl;
+            cout << "Sorted array: " << endl;
+            printArray(array, n - 1);
+        }
+        else
+        {
+            cout << "Inversions: " << mergeSort(array, 0, n - 1) << endl;
+        }
+    }
+    else
+    {
+        cout << "./fast <(int) size of array> [print flag, any int]" << endl;
+    }
+    return 0;
 }

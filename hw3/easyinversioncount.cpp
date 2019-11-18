@@ -4,64 +4,67 @@
 #include <string>
 using namespace std;
 
-int initial[256];
+int standard[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 
-void bubblesort(int arrayLength)
+int bubblesort(int array[], int length)
 {
-    int i;
-    int j;
-    int swapped = 0;
-    int temp;
-    int temp2;
-    int numInv;
-    for (i = 1; i < arrayLength; i++)
+    int inv = 0;
+    for (int i = 0; i < length; i++)
     {
-        swapped = 0;
-        for (j = 1; j < arrayLength; j++)
+        for (int j = 0; j < length; j++)
         {
-            //less than or equal is no swap, making it stable
-            if (initial[j] > initial[j + 1])
+            if (array[j] > array[i])
             {
-                temp = initial[j + 1];
-                temp2 = initial[j];
-                initial[j] = temp;
-                initial[j + 1] = temp2;
-                swapped = 1;
-                numInv++;
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                inv++;
             }
         }
-        if(!swapped)
-        {
-            break;
-        }
     }
-    cout << "Number of inversions: " << numInv << endl;
+
+    return inv;
 }
 
 void printArray(int array[], int arrayLength)
 {
-    int i;
-    for(i = 1; i < arrayLength; i++)
+    for (int i = 0; i < arrayLength; i++)
     {
         cout << array[i] << " ";
     }
     cout << endl;
 }
 
-
 int main(int argc, char **argv)
 {
-    int i;
-    int j;
-    for (j = 1; j < argc; j++)
+    if (argc == 1)
     {
-        initial[j] = atoi(argv[j]);
+        cout << "Inversions: " << bubblesort(standard, 10) << endl;
     }
-    initial[argc] = 999999;
-    cout << "Intial array: ";
-    printArray(initial, argc);
-    bubblesort(argc);
-    cout << "Sorted array: ";
-    printArray(initial, argc);
-    
+    else if (argc == 2 || argc == 3)
+    {
+        int n = atoi(argv[1]);
+        int array[n];
+        for (int i = 0; i < n; i++)
+        {
+            array[i] = ((rand() % n) * (rand() % n)) + 1;
+        }
+        if (argc == 3)
+        {
+            cout << "Intial array: " << endl;
+            printArray(array, n - 1);
+            cout << "Inversions: " << bubblesort(array, n) << endl;
+            cout << "Sorted array: " << endl;
+            printArray(array, n - 1);
+        }
+        else
+        {
+            cout << "Inversions: " << bubblesort(array, n) << endl;
+        }
+    }
+    else
+    {
+        cout << "./fast <(int) size of array> [print flag, any int]" << endl;
+    }
+    return 0;
 }
