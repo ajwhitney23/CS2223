@@ -1,6 +1,6 @@
-all: clean palindrome p2 easy2
+all: clean palindrome p2
 
-p2: easy easy2 fast
+p2: easy fast
 
 palindrome: palindromecheck.cpp
 	g++ palindromecheck.cpp -o palindrome
@@ -8,11 +8,8 @@ palindrome: palindromecheck.cpp
 easy: easyinversioncount.cpp
 	g++ easyinversioncount.cpp -o easy
 
-easy2: workingeasyinversioncount.cpp
-	g++ workingeasyinversioncount.cpp -o easy2
-
 fast: fastinversioncount.cpp
 	g++ fastinversioncount.cpp -o fast
 
 clean:
-	rm -f *.o palindrome easy easy2 fast
+	rm -f *.o palindrome easy fast
