@@ -85,10 +85,10 @@ int main(int argc, char **argv)
         if (argc == 3)
         {
             cout << "Intial array: " << endl;
-            printArray(array, n - 1);
+            printArray(array, n);
             cout << "Inversions: " << mergeSort(array, 0, n - 1) << endl;
             cout << "Sorted array: " << endl;
-            printArray(array, n - 1);
+            printArray(array, n);
         }
         else
         {
