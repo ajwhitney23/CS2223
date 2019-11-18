@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
+//helper function for printing
 void printKids(int code)
 {
     char *a = "", *b = "", *c = "", *d = "";
@@ -24,7 +24,7 @@ void printKids(int code)
     }
     printf("%6s%6s%6s%6s", a, b, c, d);
 }
-
+//function for printing
 void BRGCProf(vector<string> v)
 {
     for (int i = 1; i < v.size(); i++)
@@ -63,7 +63,7 @@ void BRGCProf(vector<string> v)
         }
     }
 }
-
+//creates the gray code
 vector<string> BRGC(int n)
 {
     vector<string> v;
@@ -97,9 +97,9 @@ int main(int argc, char **argv)
             cout << r[i] << endl;
         }
     }
-    
+
     vector<string> r = BRGC(4);
-    cout << r.size() << endl;
+    cout << "Max number of photos: " << r.size() << endl;
     cout<<" i | code | name                    | action"<<endl;
     cout<<"--------------------------------------------"<<endl;
     BRGCProf(r);
