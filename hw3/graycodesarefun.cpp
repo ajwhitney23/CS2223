@@ -3,6 +3,28 @@
 #include <vector>
 using namespace std;
 
+void printKids(int code)
+{
+    char *a = "", *b = "", *c = "", *d = "";
+    if ((code >> 0) % 2 == 1)
+    {
+        a = "alice";
+    }
+    if ((code >> 1) % 2 == 1)
+    {
+        b = "bobby";
+    }
+    if ((code >> 2) % 2 == 1)
+    {
+        c = "chris";
+    }
+    if ((code >> 3) % 2 == 1)
+    {
+        d = "dylan";
+    }
+    printf("%6s%6s%6s%6s", a, b, c, d);
+}
+
 void BRGCProf(vector<string> v)
 {
     for (int i = 1; i < v.size(); i++)
@@ -10,7 +32,11 @@ void BRGCProf(vector<string> v)
         int a = stoi(v[i - 1], nullptr, 2);
         int b = stoi(v[i], nullptr, 2);
         int diff = a - b;
-        cout << v[i] << ": ";
+
+        printf("%2i", i);
+        cout << " | " << v[i] << " |";
+        printKids(b);
+        cout << " | ";
         if (abs(diff) == 1)
         {
             cout << "alice";
@@ -62,11 +88,19 @@ vector<string> BRGC(int n)
 //main function
 int main(int argc, char **argv)
 {
-    vector<string> r = BRGC(atoi(argv[1]));
-    cout << r.size() << endl;
-    /*for (int i = 0; i < r.size(); i++)
+    if (argc==2)
     {
-        cout << r[i] << endl;
-    }*/
+        vector<string> r = BRGC(atoi(argv[1]));
+        cout << r.size() << endl;
+        for (int i = 0; i < r.size(); i++)
+        {
+            cout << r[i] << endl;
+        }
+    }
+    
+    vector<string> r = BRGC(4);
+    cout << r.size() << endl;
+    cout<<" i | code | name                    | action"<<endl;
+    cout<<"--------------------------------------------"<<endl;
     BRGCProf(r);
 }
