@@ -1,13 +1,10 @@
-all: clean palindrome easyic fastic
+all: clean palindrome easy
 
 palindrome: palindromecheck.cpp
 	g++ palindromecheck.cpp -o palindrome
 
-easyic:
-	g++ easyinversioncount.cpp -o easyic
-
-fastic:
-	g++ fastinversioncount.cpp -o fastic
+easy: easyinversioncount.cpp
+	g++ easyinversioncount.cpp -o easy
 
 clean:
-	rm -f *.o palindrome
+	rm -f *.o palindrome easy
