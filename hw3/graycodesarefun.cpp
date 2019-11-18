@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
 //helper function for printing
 void printKids(int code)
