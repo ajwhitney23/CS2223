@@ -5,16 +5,16 @@ p2: easy fast
 p3: gray
 
 palindrome: palindromecheck.cpp
-	g++ palindromecheck.cpp -o palindrome
+	g++ palindromecheck.cpp -o palindromecheck
 
 easy: easyinversioncount.cpp
-	g++ easyinversioncount.cpp -o easy
+	g++ easyinversioncount.cpp -o easyinversioncount
 
 fast: fastinversioncount.cpp
-	g++ fastinversioncount.cpp -o fast
+	g++ fastinversioncount.cpp -o fastinversioncount
 
 gray: graycodesarefun.cpp
-	g++ graycodesarefun.cpp -o gray
+	g++ graycodesarefun.cpp -o graycodesarefun
 
 clean:
-	rm -f *.o palindrome easy fast gray
+	rm -f *.o palindromecheck easyinversioncount fastinversioncount graycodesarefun

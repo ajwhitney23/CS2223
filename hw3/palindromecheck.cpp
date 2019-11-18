@@ -2,9 +2,9 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
-#include <vector>
 using namespace std;
 
+//takes an input and strips it to prep for comparision
 string stripInput(string input)
 {
     string punc = "! .,;:/";
@@ -19,7 +19,7 @@ string stripInput(string input)
     //cout << input << endl; //debug
     return input;
 }
-
+//checks to see if it is a palindrome
 int isPalindrome(string input)
 {
     int i = 0;

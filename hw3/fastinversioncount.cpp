@@ -4,6 +4,8 @@ using namespace std;
 
 int standard[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 
+//merges arrays to create a bigger array
+//helper function of mergesort
 int merge(int array[], int left, int mid, int right)
 {
     int n1 = (mid + 1) - left; //left array stop point
@@ -45,7 +47,7 @@ int merge(int array[], int left, int mid, int right)
     }
     return k;
 }
-
+//takes an array and returns the array and counts the number of inverions done
 int mergeSort(int array[], int left, int right)
 {
     int count = 0;
@@ -58,7 +60,7 @@ int mergeSort(int array[], int left, int right)
     }
     return count;
 }
-
+//prints the array
 void printArray(int array[], int arrayLength)
 {
     for (int i = 0; i < arrayLength; i++)

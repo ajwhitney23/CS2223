@@ -6,6 +6,9 @@ using namespace std;
 
 int standard[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 
+/*
+Method sorts an array 'array[]' of length 'length' and returns the number of inversions in the array and the sorted array
+*/
 int bubblesort(int array[], int length)
 {
     int inv = 0, swap = 0;
@@ -34,7 +37,7 @@ int bubblesort(int array[], int length)
 
     return inv;
 }
-
+//prints the array
 void printArray(int array[], int arrayLength)
 {
     for (int i = 0; i < arrayLength; i++)
@@ -46,6 +49,7 @@ void printArray(int array[], int arrayLength)
 
 int main(int argc, char **argv)
 {
+    srand(time(NULL));
     if (argc == 1)
     {
         cout << "Inversions: " << bubblesort(standard, 10) << endl;
