@@ -40,15 +40,14 @@ void GJEM(double array[8][9])
                 array[j][k] = temp;
             }
         }
-        //go through rows
-        for (j = 0; j < order; j++)
+        
+        for (j = 0; j < order; j++)//go through rows, wait until j is not i
         {
             if (j != i )
             {
-                double num = array[j][i] / array[i][i];
-
-                for(k = 0; k <= order; k++){
-                    array[j][k] = array[j][k] - (array[i][k] * num);
+                for(k = 0; k <= order; k++)
+                {
+                    array[j][k] = array[j][k] - (array[i][k] * (array[j][i] / array[i][i]));
                 }
             }
         }
