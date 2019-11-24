@@ -55,6 +55,8 @@ void GJEM(double array[8][9])
     }
 }
 
+
+
 void printArray(double array[8][9]) 
 { 
     int order = 8;
