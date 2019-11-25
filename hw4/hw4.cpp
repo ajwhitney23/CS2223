@@ -32,7 +32,7 @@ void pivot(int row, int column, int prow)
         pivotRow[i] = testArray[prow][i];
     }
 
-    double scalar = -1.0 * testArray[row][column]; //negative of item we're trying to zero
+    double scalar = testArray[row][column] * -1; //negative of item we're trying to zero
     for (int i = 0; i < 9; i++)
     {
         pivotRow[i] = pivotRow[i] * scalar; //scale the pivoting row
@@ -75,7 +75,7 @@ void GE()
             {
                 pivot(i, j, k);
             }
-            printArray;
+            printArray();
         }
     }
     simplify(); //just to maintain leading 1's. probably redundant
