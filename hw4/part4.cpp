@@ -147,7 +147,6 @@ int main(int argc, char **argv)
 {
     int currentTotal = findHighest(7);
     int max = nextMove(7, hightestPath[7], currentTotal);
-    cout << max << endl;
     for (int i = 0; i < 8; i++)
     {
         cout << "row: " << 9 - (i + 1) << ", column: " << (hightestPath[i] + 1) << ", value: " << board[i][hightestPath[i]] << endl;
