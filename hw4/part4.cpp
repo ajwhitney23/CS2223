@@ -147,6 +147,8 @@ int main(int argc, char **argv)
 {
     int currentTotal = findHighest(7);
     int max = nextMove(7, hightestPath[7], currentTotal);
+    cout << "Bilbo Started his journey on tile : " << (hightestPath[7]+1) << endl;
+    cout << "This was the path he took: " << endl;
     for (int i = 0; i < 8; i++)
     {
         cout << "row: " << 9 - (i + 1) << ", column: " << (hightestPath[i] + 1) << ", value: " << board[i][hightestPath[i]] << endl;
@@ -156,5 +158,6 @@ int main(int argc, char **argv)
     {
         max = max + board[i][hightestPath[i]];
     }
-    cout << "Max: " << max << endl;
+    cout << "Total number of gems he collected: " << max << endl;
+    cout << "The King hid the Arkenstone in Vault " << (hightestPath[0]+1) << endl;
 }
