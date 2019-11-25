@@ -24,15 +24,16 @@ void printArray()
     }
 }
 
-void pivot(int row, int column, int prow)
+void pivotZero(int row, int col)
 {
-    double pivotRow[9]; //copy of pivoting row, which is the row that has leading 1
+    double pivotRow[9]; //copy of row. we scale and add to perform pivot
+    int pr = (row == 7) ? 0 : row + 1;
     for (int i = 0; i < 9; i++)
     {
-        pivotRow[i] = testArray[prow][i];
+        pivotRow[i] = testArray[pr][i];
     }
 
-    double scalar = testArray[row][column] * -1; //negative of item we're trying to zero
+    double scalar = -1 * testArray[row][col] / testArray[pr][col]; //scalar to help zero
     for (int i = 0; i < 9; i++)
     {
         pivotRow[i] = pivotRow[i] * scalar; //scale the pivoting row
@@ -40,7 +41,7 @@ void pivot(int row, int column, int prow)
     //when we add scaled array, should set the target to 0
     for (int i = 0; i < 9; i++)
     {
-        testArray[row][i] = testArray[row][i] + pivotRow[i]; //add the two rows, set array
+        testArray[row][i] += pivotRow[i]; //add into the row to complete pivot
     }
 }
 
@@ -63,21 +64,15 @@ void simplify()
 
 void GE()
 {
-    simplify(); //simplify to setup
     printArray();
     for (int k = 0; k < 9; k++)
     {
-        //row we're on for the pivots
         for (int i = k + 1; i < 8; i++)
         {
-            //goes to prow+1 since we're targeting stuff below 1's in the column
-            for (int j = 0; j < 9; j++)
-            {
-                pivot(i, j, k);
-            }
+            pivotZero(i, k);
             printArray();
         }
-    }
+        }
     simplify(); //just to maintain leading 1's. probably redundant
 }
 
