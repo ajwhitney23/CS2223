@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "ostream": "cpp",
-        "__tuple": "cpp"
+        "__tuple": "cpp",
+        "iostream": "cpp"
     }
 }

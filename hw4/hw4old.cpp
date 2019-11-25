@@ -55,7 +55,7 @@ void GJEM(double array[8][9])
 }
 
 void printArray(double array[8][9])
-{   
+{
     int order = 8;
     for (int i = 0; i < 8; i++)
     {
@@ -68,7 +68,6 @@ void printArray(double array[8][9])
     cout << "-----------------------" << endl;
 }
 
-
 void bottom(double array[8][9])
 {
     for (int k = 0; k < 8; k++)
@@ -77,13 +76,20 @@ void bottom(double array[8][9])
         {
             if (i > k)
             {
-                //int inverse = array[i][k] * -1;
                 for (int j = 0; j < 9; j++)
                 {
                     //array[i][j] = (array[k][j] * inverse) + array[i][j];
-                    cout <<"before: " <<array[i][j] << endl;
-                    array[i][j] = array[i][j] - (array[k][j] * (array[i][k] / array[k][k]));
-                    cout << "after: " << array[i][j] << endl;
+                    //cout <<"before: " <<array[i][j] << endl;
+                    if (j != 8)
+                    {
+                        array[i][j] = array[i][j] - (array[k][j] * (array[i][k] / array[k][k]));
+                    }
+                    if (j == 8)
+                    {
+                        array[i][j] = (array[k][j] * (array[i][k] * -1)) + array[i][j];
+                    }
+
+                    //cout << "after: " << array[i][j] << endl;
                 }
             }
         }
@@ -92,9 +98,9 @@ void bottom(double array[8][9])
 
 void simplify(double array[8][9])
 {
-    for(int i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
-        if(array[i][i] != 0)
+        if (array[i][i] != 0)
         {
             double temp = array[i][i];
             for (int j = 0; j < 9; j++)
@@ -112,21 +118,29 @@ void top(double array[8][9])
     //... n
     //row 2 = row 2 minus (row 3 * element 3)
     //... n
-    for(int i = 0; i < 8; i++)
+    //int inverse = 0;
+    for (int k = 0; k < 8; k++)
     {
-        for(int j = 0; j < 8; j++)
+        for (int i = k + 1; i < 8; i++)
         {
-            array[i][j] = array[i][j] - (array[i+1][j] * array[i][i+1]);
+            for (int j = 0; j < 9; j++)
+            {
+                //array[i][j] = (array[k][j] * inverse) + array[i][j];
+                //cout <<"before: " <<array[i][j] << endl;
+                array[k][j] = array[k][j] - (array[i][j] * array[k][i]);
+                //cout << "after: " << array[i][j] << endl;
+            }
         }
     }
 }
 
-
 void GJE(double array[8][9])
 {
     bottom(array);
-    //simplify(array);
-    //top(array);
+    printArray(array);
+    simplify(array);
+    printArray(array);
+    top(array);
 }
 
 int main(int argc, char **argv)
