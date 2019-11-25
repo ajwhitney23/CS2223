@@ -117,10 +117,10 @@ int nextMove(int row, int column, int total)
     int newTotal = total;
     if (row == 0) //done making new moves
     {
-        return newTotal;
+        return newTotal; 
     }
     else
-    {                 //still moves left
+    {                    
         if (column == 7) //if all the way on right(search top left and mid)
         {
             //set max to 2
@@ -147,9 +147,15 @@ int main(int argc, char **argv)
 {
     int currentTotal = findHighest(7);
     int max = nextMove(7, hightestPath[7], currentTotal);
+    cout << max << endl;
     for (int i = 0; i < 8; i++)
     {
         cout << "row: " << 9 - (i + 1) << ", column: " << (hightestPath[i] + 1) << ", value: " << board[i][hightestPath[i]] << endl;
+    }
+    max = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        max = max + board[i][hightestPath[i]];
     }
     cout << "Max: " << max << endl;
 }
