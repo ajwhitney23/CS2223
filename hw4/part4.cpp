@@ -134,7 +134,7 @@ int nextMove(int row, int column, int total)
         else //(search top left, mid, right)
         {
             //set max to 3
-            //set starting to 0
+            //set starting to 1
             newTotal = newTotal + searchAbove(row, column, total, 3, 1);
         }
     }
@@ -145,5 +145,9 @@ int main(int argc, char **argv)
 {
     int currentTotal = findHighest(7);
     int max = nextMove(7,hightestPath[7], currentTotal);
+    for (int i = 7; i != -1; i--)
+    {
+        cout << i+1 << ", "<< (hightestPath[i]+1) << endl;
+    }
     cout << "Max: " << max << endl;
 }
