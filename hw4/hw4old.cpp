@@ -145,7 +145,11 @@ void GJE(double array[8][9])
 
 int main(int argc, char **argv)
 {
-    GJE(testArray);
+    bottom(testArray);
+    printArray(testArray);
+    simplify(testArray);
+    printArray(testArray);
+    top(testArray);
     printArray(testArray);
     return 0;
 }
