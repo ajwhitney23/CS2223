@@ -33,6 +33,20 @@ void printArray()
     }
 }
 
+void swap(int r1, int r2)
+{
+    if (r1 == r2)
+    {
+        return;
+    }
+    for (int i = 0; i < 9; i++)
+    {
+        double d = c[r1][i];
+        c[r1][i] = c[r2][i];
+        c[r2][i] = d;
+    }
+}
+
 void simplify()
 {
     cout << "S" << endl;
@@ -96,7 +110,6 @@ void GJE()
         //iterate all rows
         for (int j = i - 1; j >= 0; j--)
         {
-
             s = c[j][i] / c[i][i];
             //operate on all columns for pivot data
             if (isnormal(s))
@@ -107,27 +120,27 @@ void GJE()
                 }
             }
         }
-
         printArray();
     }
-    simplify();
 }
 
-void RREF()
+void REF()
 {
     int lead = 0;
     int rows = 8;
     int cols = 9;
 
-    for (int r = 0; r < rows; r++)
+    for (int r = 1; r < rows; r++)
     {
         if (cols <= lead)
         {
+            cout << "cols<=lead" << endl;
             break;
         }
         int i = r;
         while (c[i][lead] == 0)
         {
+            cout << "in while" << endl;
             i++;
             if (rows == i)
             {
@@ -139,19 +152,18 @@ void RREF()
                 }
             }
         }
-        for (int j = 0; j < cols; j++)
-        {
-            double d = c[i][j];
-            c[i][j] = c[r][j];
-            c[r][j] = d;
-        }
+        printArray();
+        swap(i, r);
+        printArray();
         if (c[r][lead] != 0)
         {
+            cout << "c[r][lead]!=0" << endl;
             for (int j = 0; j < cols; j++)
             {
                 c[r][j] = c[r][j] / c[r][lead];
             }
         }
+        printArray();
         for (int j = 0; j < rows; j++)
         {
             if (j != r)
@@ -162,6 +174,7 @@ void RREF()
                 }
             }
         }
+        printArray();
         lead++;
     }
 }
@@ -172,6 +185,22 @@ void RREF2()
     int cols = 9;
     for (int lead = 0; lead < cols - 1; lead++)
     {
+        cout << "a" << endl;
+        if (c[lead][lead] == 0)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                if (c[i][lead] != 0)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        double d = c[i][lead];
+                        c[i][lead] = c[j][lead];
+                        c[j][lead] = c[i][lead];
+                    }
+                }
+            }
+        }
         for (int i = 0; i < cols; i++)
         {
             c[lead][i] = c[lead][i] / c[lead][lead];
@@ -185,8 +214,11 @@ void RREF2()
                 c[i][j] -= d;
             }
         }
+        cout << "b" << endl;
     }
     printArray();
+    cout << endl
+         << endl;
     for (int lead = cols - 1; lead >= 0; lead--)
     {
         /*for (int i = cols; i >= 0; i--)
@@ -203,10 +235,15 @@ void RREF2()
         }
     }
 }
+
 int main(int argc, char **argv)
 {
     printArray();
-    RREF2();
+    REF();
+    printArray();
+    simplify();
+    printArray();
+    GJE();
     printArray();
     //GE();
     //GJE();
