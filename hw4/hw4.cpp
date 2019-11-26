@@ -88,9 +88,9 @@ void GJE()
     }
 }
 
+//code written based on pseudocode from wikipedia, creates row echelon form (upper triangular matrix)
 void REF()
 {
-    //code written based on pseudocode from wikipedia, creates row echelon form (upper triangular matrix)
     //see REF.png for pseudocode
     int lead = 0; //lead column we're reducing
     int rows = 8; //number of rows
