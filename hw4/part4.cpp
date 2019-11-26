@@ -15,6 +15,7 @@ int board[8][8] = {{89, 70, 73, 83, 90, 22, 44, 92},  //row7
 store a 2d array that holds the path and then the total... 
 after we parse all paths, check for highest and then print out that row
 */
+int allPaths[8][9];
 
 int hightestPath[8]; //stores the most precious path [6, 7...] (add 1 to get vault #)
 //GOAL: collect the highest value after going through every row.
@@ -107,6 +108,79 @@ int searchAbove(int row, int column, int total, int max, int min)
     hightestPath[row - 1] = col;
     return value;
 }
+
+int searchAbove2(int row, int column, int total, int max, int min, int start)
+{
+    int col;
+    int value = 0;
+    switch (min)
+    {
+    case 1:
+        for (int i = 0; i < max; i++)
+        {
+            switch (i)
+            {
+            case 0:
+                if (board[row - 1][column - 1] > value)
+                {
+                    value = board[row - 1][column - 1];
+                    col = column - 1;
+                }
+                break;
+            case 1:
+                if (board[row - 1][column] > value)
+                {
+                    value = board[row - 1][column];
+                    col = column;
+                }
+                break;
+            case 2:
+                if (board[row - 1][column + 1] > value)
+                {
+                    value = board[row - 1][column];
+                    col = column + 1;
+                }
+                break;
+            default:
+                exit(-1);
+                break;
+            }
+        }
+        break;
+    case 2:
+        for (int i = 1; i < max; i++)
+        {
+            switch (i)
+            {
+            case 1:
+                if (board[row - 1][column] > value)
+                {
+                    value = board[row - 1][column];
+                    col = column;
+                }
+                break;
+            case 2:
+                if (board[row - 1][column + 1] > value)
+                {
+                    value = board[row - 1][column + 1];
+                    col = column + 1;
+                }
+                break;
+            default:
+                exit(-1);
+                break;
+            }
+        }
+        break;
+    default:
+        cout << "error occured"
+             << "min : " << min << endl;
+        exit(-1);
+        break;
+    }
+    allPaths[start][row - 1] = col;
+    return value;
+}
 /*
 row and column is current row/column 
 total is current total
@@ -143,21 +217,62 @@ int nextMove(int row, int column, int total)
     return nextMove(row - 1, hightestPath[row - 1], newTotal); //need to find way to set next column
 }
 
+int nextMove2(int row, int column, int total, int start)
+{
+    int newTotal = total;
+    if (row == 0) //done making new moves
+    {
+        allPaths[start][8] = newTotal; 
+    }
+    else
+    {                    
+        if (column == 7) //if all the way on right(search top left and mid)
+        {
+            //set max to 2
+            //set starting to 1
+            newTotal = newTotal + searchAbove2(row, column, total, 2, 1, start);
+        }
+        else if (column == 0) //if all the way on left(mid and top right)
+        {
+            //set max to 3
+            //starting to 2
+            newTotal = newTotal + searchAbove2(row, column, total, 3, 2, start);
+        }
+        else //(search top left, mid, right)
+        {
+            //set max to 3
+            //set starting to 1
+            newTotal = newTotal + searchAbove2(row, column, total, 3, 1, start);
+        }
+        nextMove2(row - 1, column, newTotal, start);
+    }
+    //cout << row -1 << " " << column << " " << newTotal << " " << start << endl;
+    //nextMove2(row - 1, column, newTotal, start); //need to find way to set next column
+}
+
 int main(int argc, char **argv)
 {
+    /*
     int currentTotal = findHighest(7);
-    int max = nextMove(7, hightestPath[7], currentTotal);
+    //int max = nextMove(7, 0, board[7][0]);
     cout << "Bilbo Started his journey on tile : " << (hightestPath[7]+1) << endl;
     cout << "This was the path he took: " << endl;
     for (int i = 0; i < 8; i++)
     {
         cout << "row: " << 9 - (i + 1) << ", column: " << (hightestPath[i] + 1) << ", value: " << board[i][hightestPath[i]] << endl;
     }
-    max = 0;
+    int max = 0;
     for (int i = 0; i < 8; i++)
     {
         max = max + board[i][hightestPath[i]];
     }
     cout << "Total number of gems he collected: " << max << endl;
     cout << "The King hid the Arkenstone in Vault " << (hightestPath[0]+1) << endl;
+    */
+    for(int j = 0; j < 8; j++)
+    {
+        allPaths[j][0] = j;
+        nextMove2(7, j, board[7][j], j);
+    }
+
 }
