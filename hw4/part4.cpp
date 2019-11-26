@@ -11,45 +11,22 @@ int board[8][8] = {{89, 70, 73, 83, 90, 22, 44, 92},  //row7
                    {73, 38, 24, 49, 18, 6, 40, 74},   //row1
                    {79, 71, 18, 20, 34, 51, 93, 65}}; //row0
 
-/*
-store a 2d array that holds the path and then the total... 
-after we parse all paths, check for highest and then print out that row
-*/
-int allPaths[8][9];
-
 int tempPath[8]; //stores the most precious path [6, 7...] (add 1 to get vault #)
 //GOAL: collect the highest value after going through every row.
 
-int findHighest(int row)
-{
-    int max = 0;
-    int col;
-    for (int i = 0; i < 8; i++)
-    {
-        if (board[row][i] > max)
-        {
-            max = board[row][i];
-            tempPath[row] = i;
-        }
-    }
-    return max;
-}
-
-//searh above given row and column
+//searh above given row and column finding the highest next element
 int searchAbove(int row, int column)
 {
-    int col;
-    int value = 0;
-    if(column == 0)
+    int col; //temp column to store into array
+    int value = 0; //value to return
+    if(column == 0) //check if against left wall
     {
-        //cout << column << endl;
-        //cout << board[row-1][column] << endl;
         for (int i = 0; i < 2; i++)
         {
             switch (i)
             {
             case 0:
-                if (board[row - 1][column] > value)
+                if (board[row - 1][column] > value)//search above
                 {
                     value = board[row - 1][column];
                     col = column;
@@ -57,7 +34,7 @@ int searchAbove(int row, int column)
                 }
                 break;
             case 1:
-                if (board[row - 1][column+1] > value)
+                if (board[row - 1][column+1] > value)//search to the right
                 {
                     value = board[row - 1][column+1];
                     col = column+1;
@@ -69,21 +46,21 @@ int searchAbove(int row, int column)
             }
         }
     }
-    else if(column == 7)
+    else if(column == 7) //check if against right wall
     {
         for (int i = 0; i < 2; i++)
         {
             switch (i)
             {
             case 0:
-                if (board[row - 1][column - 1] > value)
+                if (board[row - 1][column - 1] > value)//search to the left
                 {
                     value = board[row - 1][column -1];
                     col = column - 1;
                 }
                 break;
             case 1:
-                if (board[row - 1][column] > value)
+                if (board[row - 1][column] > value)//search above
                 {
                     value = board[row - 1][column];
                     col = column;
@@ -101,21 +78,21 @@ int searchAbove(int row, int column)
             switch (i)
             {
             case 0:
-                if (board[row - 1][column - 1] > value)
+                if (board[row - 1][column - 1] > value)//search to the left
                 {
                     value = board[row - 1][column - 1];
                     col = column - 1;
                 }
                 break;
             case 1:
-                if (board[row - 1][column] > value)
+                if (board[row - 1][column] > value)//search above
                 {
                     value = board[row - 1][column];
                     col = column;
                 }
                 break;
             case 2:
-                if (board[row - 1][column + 1] > value)
+                if (board[row - 1][column + 1] > value)//search to the right
                 {
                     value = board[row - 1][column];
                     col = column + 1;
@@ -127,10 +104,8 @@ int searchAbove(int row, int column)
             }
         }
     }
-    //cout << col << ", ";
-    //cout << board[row-1][col] << endl;
-    tempPath[row - 1] = col;
-    return value;
+    tempPath[row - 1] = col; //store next column in array
+    return value; //return value of that column
 }
 /*
 row and column is current row/column 
@@ -139,113 +114,67 @@ returns the total
 */
 int nextMove(int row, int column, int total)
 {
-    int newTotal = total;
+    int newTotal = total; //keep total
     if (row == 0) //done making new moves
     {
         return newTotal;
     }
-    else
+    else //make new moves
     {
-        /*
-        if (column == 7) //if all the way on right(search top left and mid)
-        {
-            //set max to 2
-            //set starting to 1
-            newTotal = newTotal + searchAbove(row, column);
-        }
-        else if (column == 0) //if all the way on left(mid and top right)
-        {
-            //set max to 3
-            //starting to 2
-            newTotal = newTotal + searchAbove(row, column);
-        }
-        else //(search top left, mid, right)
-        {
-            //set max to 3
-            //set starting to 1
-            newTotal = newTotal + searchAbove(row, column);
-        }
-        */
-        newTotal = newTotal + searchAbove(row, column);
+        newTotal = newTotal + searchAbove(row, column); //search the row above 
     }
     return nextMove(row - 1, tempPath[row - 1], newTotal); //need to find way to set next column
 }
 
-void printArray(int array[8][9])
-{
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            cout << array[i][j] << "  ";
-        }
-        cout << endl;
-    }
-}
-
 int main(int argc, char **argv)
 {
-    /*
-    int currentTotal = findHighest(7);
-    //int max = nextMove(7, 0, board[7][0]);
-    cout << "Bilbo Started his journey on tile : " << (tempPath[7]+1) << endl;
-    cout << "This was the path he took: " << endl;
-    for (int i = 0; i < 8; i++)
-    {
-        cout << "row: " << 9 - (i + 1) << ", column: " << (tempPath[i] + 1) << ", value: " << board[i][tempPath[i]] << endl;
-    }
-    int max = 0;
-    for (int i = 0; i < 8; i++) 
-    {
-        max = max + board[i][tempPath[i]];
-    }
-    cout << "Total number of gems he collected: " << max << endl;
-    cout << "The King hid the Arkenstone in Vault " << (tempPath[0]+1) << endl;
-    */
+    //create final array to be printed
     int finalArray[8];
+    //start with the first possible path
     tempPath[7] = 0;
     int n = nextMove(7, 0, board[7][0]);
+    //move tempPath into finalArray for first iteration
     for (int i = 0; i < 8; i++)
     {
         finalArray[i] = tempPath[i];
     }
-    int max = 0;
+    int max = 0; //max of temp
     for (int i = 0; i < 8; i++)
     {
         max = max + board[i][tempPath[i]];
     }
-    int max2 = 0;
+    int max2 = 0; //max of current highest
     for (int i = 0; i < 8; i++)
     {
         max2 = max2 + board[i][finalArray[i]];
     }
-
+    //go through rest of row0, column j as starting points
     for (int j = 1; j < 8; j++)
     {
-        tempPath[7] = j;
-        nextMove(7, j, board[7][j]);
-        max = 0;
-        for (int i = 0; i < 8; i++)
+        tempPath[7] = j; //set first as j
+        nextMove(7, j, board[7][j]); //go through rest of moves
+        max = 0; //rest max to 0
+        for (int i = 0; i < 8; i++) //find max of new tempPath
         {
             max = max + board[i][tempPath[i]];
         }
-        if (max > max2)
+        if (max > max2) //if new max > old, replace it
         {
-            max2 = max;
-            for (int i = 0; i < 8; i++)
+            max2 = max; 
+            for (int i = 0; i < 8; i++) //move it into final
             {
                 finalArray[i] = tempPath[i];
             }
         }
     }
-    cout << "Bilbo Started his journey on tile : " << (finalArray[7]+1) << endl;
-    cout << "This was the path he took: " << endl;
+    cout << "Bilbo Started his journey on tile : " << (finalArray[7]+1) << endl; //find where bilbo started
+    cout << "This was the path he took: " << endl; //print path he took
     int num = 0;
     for (int i = 0; i < 8; i++)
     {
         cout << "row: " << 9 - (i + 1) << ", column: " << (finalArray[i] + 1) << ", value: " << board[i][finalArray[i]] << endl;
         num = num + board[i][finalArray[i]];
     }
-    cout << "Total number of gems he collected: " << num << endl;
-    cout << "The King hid the Arkenstone in Vault " << (finalArray[0]+1) << endl;
+    cout << "Total number of gems he collected: " << num << endl; //print total
+    cout << "The King hid the Arkenstone in Vault " << (finalArray[0]+1) << endl; //print final destination
 }
