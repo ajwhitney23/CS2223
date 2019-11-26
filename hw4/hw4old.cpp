@@ -84,14 +84,7 @@ void bottom(double array[8][9])
                 {
                     //array[i][j] = (array[k][j] * inverse) + array[i][j];
                     //cout <<"before: " <<array[i][j] << endl;
-                    if (j != 8)
-                    {
-                        array[i][j] = array[i][j] - (array[k][j] * (array[i][k] / array[k][k]));
-                    }
-                    if (j == 8)
-                    {
-                        array[i][j] = (array[k][j] * (array[i][k] * -1)) + array[i][j];
-                    }
+                    array[i][j] = array[i][j] - (array[k][j] * (array[i][k] / array[k][k]));
 
                     //cout << "after: " << array[i][j] << endl;
                 }
