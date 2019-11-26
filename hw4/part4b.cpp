@@ -40,7 +40,7 @@ int searchAbove(int row, int column)
 {
     int col;
     int value = 0;
-    if(column == 0)
+    if (column == 0)
     {
         //cout << column << endl;
         //cout << board[row-1][column] << endl;
@@ -53,14 +53,13 @@ int searchAbove(int row, int column)
                 {
                     value = board[row - 1][column];
                     col = column;
-    
                 }
                 break;
             case 1:
-                if (board[row - 1][column+1] > value)
+                if (board[row - 1][column + 1] > value)
                 {
-                    value = board[row - 1][column+1];
-                    col = column+1;
+                    value = board[row - 1][column + 1];
+                    col = column + 1;
                 }
                 break;
             default:
@@ -69,7 +68,7 @@ int searchAbove(int row, int column)
             }
         }
     }
-    else if(column == 7)
+    else if (column == 7)
     {
         for (int i = 0; i < 2; i++)
         {
@@ -78,7 +77,7 @@ int searchAbove(int row, int column)
             case 0:
                 if (board[row - 1][column - 1] > value)
                 {
-                    value = board[row - 1][column -1];
+                    value = board[row - 1][column - 1];
                     col = column - 1;
                 }
                 break;
@@ -95,7 +94,8 @@ int searchAbove(int row, int column)
             }
         }
     }
-    else {
+    else
+    {
         for (int i = 0; i < 3; i++)
         {
             switch (i)
@@ -238,7 +238,7 @@ int main(int argc, char **argv)
             }
         }
     }
-    cout << "Bilbo Started his journey on tile : " << (finalArray[7]+1) << endl;
+    cout << "Bilbo Started his journey on tile : " << (finalArray[7] + 1) << endl;
     cout << "This was the path he took: " << endl;
     int num = 0;
     for (int i = 0; i < 8; i++)
@@ -247,5 +247,5 @@ int main(int argc, char **argv)
         num = num + board[i][finalArray[i]];
     }
     cout << "Total number of gems he collected: " << num << endl;
-    cout << "The King hid the Arkenstone in Vault " << (finalArray[0]+1) << endl;
+    cout << "The King hid the Arkenstone in Vault " << (finalArray[0] + 1) << endl;
 }

@@ -1,3 +1,4 @@
-The BetterForward algorithm will solve for one variable at a time.  In the example provided, you can not solve for just one value at a time, making it unable to solve the equation, since there is either 1, or 3 co-efficients, none of the equations have 2 co-efficients.
+The BetterForwardElimination algorithm fails to provide a solution for the system because in the event of the diagonal values being 0 in any case, 
+the failure becomes catastrophic and the algorithm fails on the rest of the data.
 
----Still need to figure out how to fix this....
+This is the same problem as the original ForwardElimination algorithm.

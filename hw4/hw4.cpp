@@ -33,6 +33,7 @@ void printArray()
     }
 }
 
+//swaps two rows
 void swap(int r1, int r2)
 {
     if (r1 == r2)
@@ -47,9 +48,9 @@ void swap(int r1, int r2)
     }
 }
 
+//creates diagonal 1's
 void simplify()
 {
-    cout << "S" << endl;
     //scale matrix operation by inverse of diagonals
     //effectively creates leading 1's for gaussian elimination
     for (int i = 0; i < 8; i++)
@@ -65,23 +66,22 @@ void simplify()
     }
 }
 
+//perform gauss-jordan elimination to produce reduced row echelon form
 void GJE()
 {
-    //perform gauss-jordan elimination to produce reduced row echelon form
-    double s; //temporary variable for scalar in pivot action
     //iterate variable columns, not columns for constants
     for (int i = 7; i >= 0; i--)
     {
         //iterate all rows
         for (int j = i - 1; j >= 0; j--)
         {
-            s = c[j][i] / c[i][i];
+            double s = c[j][i] / c[i][i]; //temporary variable for scalar in pivot action
             //operate on all columns for pivot data
             if (isnormal(s))
             {
                 for (int k = 8; k >= 0; k--)
                 {
-                    c[j][k] += -1 * (s * c[i][k]);
+                    c[j][k] -= s * c[i][k];
                 }
             }
         }
@@ -90,21 +90,21 @@ void GJE()
 
 void REF()
 {
-    int lead = 0;
-    int rows = 8;
-    int cols = 9;
+    //code written based on pseudocode from wikipedia, creates row echelon form (upper triangular matrix)
+    //see REF.png for pseudocode
+    int lead = 0; //lead column we're reducing
+    int rows = 8; //number of rows
+    int cols = 9; //number of columns
 
     for (int r = 1; r < rows; r++)
     {
         if (cols <= lead)
         {
-            cout << "cols<=lead" << endl;
             break;
         }
         int i = r;
         while (c[i][lead] == 0)
         {
-            cout << "in while" << endl;
             i++;
             if (rows == i)
             {
@@ -116,44 +116,44 @@ void REF()
                 }
             }
         }
-        printArray();
-        swap(i, r);
-        printArray();
+        swap(i, r); //swap row i and r
         if (c[r][lead] != 0)
         {
-            cout << "c[r][lead]!=0" << endl;
             for (int j = 0; j < cols; j++)
             {
                 c[r][j] = c[r][j] / c[r][lead];
             }
         }
-        printArray();
         for (int j = 0; j < rows; j++)
         {
             if (j != r)
             {
                 for (int k = 0; k < cols; k++)
                 {
-                    c[i][k] -= c[r][k] * c[i][lead];
+                    c[i][k] -= c[r][k] * c[i][lead]; //setting 0
                 }
             }
         }
-        printArray();
         lead++;
     }
 }
 
 int main(int argc, char **argv)
 {
-    printArray();
-    REF();
-    simplify();
-    GJE();
-    printArray();
+    cout << "before" << endl;
+    printArray(); //print array before
+    REF();        //reduce to row echelon form
+    GJE();        //reduce to reduced row echelon form
+    simplify();   //create diagonal unit matrix
+    cout << "after" << endl;
+    printArray(); //print array after
     cout << endl;
+    int verify = 0;
     for (int i = 0; i < 8; i++)
     {
-        cout << "x" << i << "= " << setw(7) << c[i][8] << endl;
+        cout << "x" << i << ": " << setw(7) << c[i][8] << endl;
+        verify += c[i][8];
     }
+    cout << "sum: " << verify << endl; //if the sum adds up to 0, it's likely to be at least partially correct
     return 0;
 }

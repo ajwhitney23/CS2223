@@ -1,3 +1,6 @@
-The ForwardElimination algorithm on page 210 fails to provide a solution because all of the co-effients for the first row of the equations is 1, which does not allow the alogorithm to move on from the first row, causing it to fail.
+The ForwardElimination algorithm on page 210 fails to provide a solution because it doesn't work for the case A[i][i]=0.
+In performing the subtraction in the algorithm we can create 0's which will cause issues. 
+(this is what happened for the better part of 4 hours working on part 3)
 
-The BetterForwardElimination algorithm on page 211 remedies this by adding a pivot point so if row one fails, it will find another row to then start from and determine soltuions that way, not allowng the program to get stuck on one row.
+The BetterForwardElimination algorithm on page 211 remedies this by adding a pivot point so if row one fails, 
+it will find another row to then start from and determine soltuions that way.
