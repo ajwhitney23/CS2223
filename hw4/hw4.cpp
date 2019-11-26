@@ -18,7 +18,7 @@ double c[8][9] = {{1, 1, 1, 1, 1, 1, 1, 1, 0},
 //prints array
 void printArray()
 {
-    cout << "----------------------------------------" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
     for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 9; j++)
@@ -53,7 +53,7 @@ void simplify()
 
 void GE()
 {
-    //simplify();
+    simplify();
     cout << "GE" << endl;
     //perform gaussian elimination to produce row echelon form
 
@@ -63,19 +63,16 @@ void GE()
         //iterate all rows
         for (int j = i + 1; j < 8; j++)
         {
-            double s = c[j][i] / c[i][0]; //temporary variable for scalar in pivot action
+            double s = c[j][i] / c[i][i]; //temporary variable for scalar in pivot action
             printf("%d,%d,%f", i, j, s);
             //operate on all columns for pivot data
             //cout << "before " << s << endl;
             //printArray();
             if (isnormal(s))
             {
-                cout << "normal" << endl;
                 for (int k = i; k < 9; k++)
                 {
                     c[j][k] += -1 * (s * c[i][k]);
-                    //c[i][j] = c[i][j] - (c[k][j] * (c[i][k] / c[k][k]));
-                    //c[j][k] = c[j][k] - (c[i][k] * (c[j][i] / c[i][i]));
                 }
             }
             s = 0;
@@ -116,12 +113,103 @@ void GJE()
     simplify();
 }
 
+void RREF()
+{
+    int lead = 0;
+    int rows = 8;
+    int cols = 9;
+
+    for (int r = 0; r < rows; r++)
+    {
+        if (cols <= lead)
+        {
+            break;
+        }
+        int i = r;
+        while (c[i][lead] == 0)
+        {
+            i++;
+            if (rows == i)
+            {
+                i = r;
+                lead++;
+                if (cols == lead)
+                {
+                    break;
+                }
+            }
+        }
+        for (int j = 0; j < cols; j++)
+        {
+            double d = c[i][j];
+            c[i][j] = c[r][j];
+            c[r][j] = d;
+        }
+        if (c[r][lead] != 0)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                c[r][j] = c[r][j] / c[r][lead];
+            }
+        }
+        for (int j = 0; j < rows; j++)
+        {
+            if (j != r)
+            {
+                for (int k = 0; k < cols; k++)
+                {
+                    c[i][k] -= c[r][k] * c[i][lead];
+                }
+            }
+        }
+        lead++;
+    }
+}
+
+void RREF2()
+{
+    int rows = 8;
+    int cols = 9;
+    for (int lead = 0; lead < cols - 1; lead++)
+    {
+        for (int i = 0; i < cols; i++)
+        {
+            c[lead][i] = c[lead][i] / c[lead][lead];
+        }
+        printArray();
+        for (int i = lead + 1; i < rows; i++)
+        {
+            double d = c[i][lead];
+            for (int j = 0; j < cols; j++)
+            {
+                c[i][j] -= d;
+            }
+        }
+    }
+    printArray();
+    for (int lead = cols - 1; lead >= 0; lead--)
+    {
+        /*for (int i = cols; i >= 0; i--)
+        {
+            c[lead][i] = c[lead][i] / c[lead][lead];
+        }*/
+        for (int i = rows; i >= lead - 1; i--)
+        {
+            double d = c[i][lead];
+            for (int j = 0; j < cols; j++)
+            {
+                c[i][j] -= d;
+            }
+        }
+    }
+}
 int main(int argc, char **argv)
 {
     printArray();
-    GE();
+    RREF2();
     printArray();
-    GJE();
+    //GE();
+    //GJE();
     printArray();
     //GJE(testArray);
     //printArray(testArray);
