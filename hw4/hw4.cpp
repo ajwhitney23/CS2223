@@ -65,43 +65,8 @@ void simplify()
     }
 }
 
-void GE()
-{
-    simplify();
-    cout << "GE" << endl;
-    //perform gaussian elimination to produce row echelon form
-
-    //iterate variable columns, not columns for constants
-    for (int i = 0; i < 8; i++)
-    {
-        //iterate all rows
-        for (int j = i + 1; j < 8; j++)
-        {
-            double s = c[j][i] / c[i][i]; //temporary variable for scalar in pivot action
-            printf("%d,%d,%f", i, j, s);
-            //operate on all columns for pivot data
-            //cout << "before " << s << endl;
-            //printArray();
-            if (isnormal(s))
-            {
-                for (int k = i; k < 9; k++)
-                {
-                    c[j][k] += -1 * (s * c[i][k]);
-                }
-            }
-            s = 0;
-            //printArray();
-            //cout << "after" << endl;
-        }
-        cout << i << endl;
-        printArray();
-    }
-    simplify();
-}
-
 void GJE()
 {
-    cout << "GJE" << endl;
     //perform gauss-jordan elimination to produce reduced row echelon form
     double s; //temporary variable for scalar in pivot action
     //iterate variable columns, not columns for constants
@@ -120,7 +85,6 @@ void GJE()
                 }
             }
         }
-        printArray();
     }
 }
 
@@ -179,76 +143,17 @@ void REF()
     }
 }
 
-void RREF2()
-{
-    int rows = 8;
-    int cols = 9;
-    for (int lead = 0; lead < cols - 1; lead++)
-    {
-        cout << "a" << endl;
-        if (c[lead][lead] == 0)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                if (c[i][lead] != 0)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        double d = c[i][lead];
-                        c[i][lead] = c[j][lead];
-                        c[j][lead] = c[i][lead];
-                    }
-                }
-            }
-        }
-        for (int i = 0; i < cols; i++)
-        {
-            c[lead][i] = c[lead][i] / c[lead][lead];
-        }
-        printArray();
-        for (int i = lead + 1; i < rows; i++)
-        {
-            double d = c[i][lead];
-            for (int j = 0; j < cols; j++)
-            {
-                c[i][j] -= d;
-            }
-        }
-        cout << "b" << endl;
-    }
-    printArray();
-    cout << endl
-         << endl;
-    for (int lead = cols - 1; lead >= 0; lead--)
-    {
-        /*for (int i = cols; i >= 0; i--)
-        {
-            c[lead][i] = c[lead][i] / c[lead][lead];
-        }*/
-        for (int i = rows; i >= lead - 1; i--)
-        {
-            double d = c[i][lead];
-            for (int j = 0; j < cols; j++)
-            {
-                c[i][j] -= d;
-            }
-        }
-    }
-}
-
 int main(int argc, char **argv)
 {
     printArray();
     REF();
-    printArray();
     simplify();
-    printArray();
     GJE();
     printArray();
-    //GE();
-    //GJE();
-    printArray();
-    //GJE(testArray);
-    //printArray(testArray);
+    cout << endl;
+    for (int i = 0; i < 8; i++)
+    {
+        cout << "x" << i << "= " << setw(7) << c[i][8] << endl;
+    }
     return 0;
 }
