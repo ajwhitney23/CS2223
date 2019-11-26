@@ -1,6 +1,7 @@
 //https://www.youtube.com/watch?v=0fTSBIBD7Cs
 #include <cstdlib>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 double testArray[8][9] = {{1, 1, 1, 1, 1, 1, 1, 1, 0},
@@ -14,13 +15,18 @@ double testArray[8][9] = {{1, 1, 1, 1, 1, 1, 1, 1, 0},
 
 void printArray()
 {
-    cout << "----------------------------------------" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
     for (int i = 0; i < 8; i++)
     {
-        printf("%7.3f %7.3f %7.3f %7.3f %7.3f %7.3f %7.3f %7.3f | %7.3f \n",
-               testArray[i][0], testArray[i][1], testArray[i][2], testArray[i][3], testArray[i][4],
-               testArray[i][5], testArray[i][6], testArray[i][7], testArray[i][8]);
-        //not the prettiest solution but the results are nice
+        for (int j = 0; j < 9; j++)
+        {
+            if (j == 8)
+            {
+                cout << "| ";
+            }
+            cout << setw(10) << setprecision(4) << testArray[i][j];
+        }
+        cout << endl;
     }
 }
 
@@ -72,7 +78,7 @@ void GE()
             pivotZero(i, k);
             printArray();
         }
-        }
+    }
     simplify(); //just to maintain leading 1's. probably redundant
 }
 
