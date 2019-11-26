@@ -1,7 +1,6 @@
 //https://www.youtube.com/watch?v=0fTSBIBD7Cs
 #include <cstdlib>
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
 double testArray[8][9] = {{1, 1, 1, 1, 1, 1, 1, 1, 0},
@@ -55,21 +54,18 @@ void GJEM(double array[8][9])
     }
 }
 
-void printArray()
+void printArray(double array[8][9])
 {
-    cout << "--------------------------------------------------------------------------------" << endl;
+    int order = 8;
     for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 9; j++)
         {
-            if (j == 8)
-            {
-                cout << "| ";
-            }
-            cout << setw(10) << setprecision(4) << testArray[i][j];
+            cout << array[i][j] << "  ";
         }
         cout << endl;
     }
+    cout << "-----------------------" << endl;
 }
 
 void bottom(double array[8][9])
@@ -141,19 +137,19 @@ void top(double array[8][9])
 void GJE(double array[8][9])
 {
     bottom(array);
-    printArray();
+    printArray(array);
     simplify(array);
-    printArray();
+    printArray(array);
     top(array);
 }
 
 int main(int argc, char **argv)
 {
     bottom(testArray);
-    printArray();
+    printArray(testArray);
     simplify(testArray);
-    printArray();
+    printArray(testArray);
     top(testArray);
-    printArray();
+    printArray(testArray);
     return 0;
 }
