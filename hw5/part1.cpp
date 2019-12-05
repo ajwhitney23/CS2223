@@ -24,7 +24,7 @@ vector<string> readRaven()
             words.push_back(buffer);
         }
     }
-    char symbols[] = {'"', '.', '-', ',', ';', ':', '!', '\n'};
+    char symbols[] = {'"', '.', '-', ',', ';', ':', '!', '?', '\n'};
     int l = strlen(symbols);
     for (int i = 0; i < words.size(); i++)
     {
@@ -45,13 +45,10 @@ int main()
 {
     vector<string> words = readRaven();
     HashTable t = HashTable(1000);
-    cout << t.hash("he");
-    /*
     for (int i = 0; i < words.size(); i++)
     {
         cout << i << " " << words[i] << " ";
         t.insert(words[i]);
     }
     t.printTable();
-    */
 }

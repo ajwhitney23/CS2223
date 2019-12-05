@@ -73,6 +73,11 @@ int HashTable::insert(string v)
                 insertFlag = true; //set flag
                 break;
             }
+            else if (table[i] == v)
+            {
+                cout << "duplicate via while at " << i << endl;
+                return 1;
+            }
             i++; //iterate
             if (i == size)
             {
