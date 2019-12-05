@@ -1,9 +1,11 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <vector>
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include "hash.cpp"
 
 using namespace std;
 
@@ -28,9 +30,9 @@ vector<string> readRaven()
     {
         for (int j = 0; j < l; j++)
         {
-            words.at(i).erase(remove(words.at(i).begin(), words.at(i).end(), symbols[j]), words.at(i).end());
+            words[i].erase(remove(words[i].begin(), words[i].end(), symbols[j]), words[i].end());
         }
-        if (words.at(i).empty())
+        if (words[i].empty())
         {
             words.erase(words.begin() + i);
             i--;
@@ -42,9 +44,14 @@ vector<string> readRaven()
 int main()
 {
     vector<string> words = readRaven();
+    HashTable t = HashTable(1000);
+    cout << t.hash("he");
+    /*
     for (int i = 0; i < words.size(); i++)
     {
-        cout << words.at(i) << endl;
+        cout << i << " " << words[i] << " ";
+        t.insert(words[i]);
     }
-    cout << words.size() << endl;
+    t.printTable();
+    */
 }
