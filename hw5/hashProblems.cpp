@@ -51,4 +51,9 @@ int main()
         t.insert(words[i]);
     }
     t.printTable();
+    t.part3a();
+    t.part3b();
+    t.part3c();
+    t.part3d();
+    t.part3e();
 }
