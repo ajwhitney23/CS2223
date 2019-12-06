@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include <string.h>
 #include "hash.cpp"
 
 using namespace std;
