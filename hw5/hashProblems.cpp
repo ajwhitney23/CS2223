@@ -20,7 +20,9 @@ vector<string> readRaven()
         words.push_back(temp);
     }
     myfile.close();
-    char symbols[] = {'"', '.', '-', ',', ';', ':', '!', '?'};
+
+    //removes undesireable symbols
+    char symbols[] = {'\"', '.', '-', ',', ';', ':', '!', '?'};
     int l = strlen(symbols);
     for (int i = 0; i < words.size(); i++)
     {

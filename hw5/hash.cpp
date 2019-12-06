@@ -23,7 +23,6 @@ public:
     }
     int hash(string s);
     int insert(string v);
-    string getKey(int k);
     void printTable();
 
     void part3a();
@@ -34,7 +33,6 @@ public:
 
     ~HashTable()
     {
-        delete table;
     }
 };
 
@@ -43,6 +41,7 @@ int HashTable::hash(string s)
     int ret = 0;
     for (int i = 0; i < s.length(); i++)
     {
+        //i tried my best to implement off the PDF but i'm still not 100% i got it right
         ret += (ret * C + (int)s[i]) % (size - 1);
     }
     return (ret % (size - 1));
@@ -51,17 +50,21 @@ int HashTable::hash(string s)
 //insert string into table, returns 1 if insert is successful, 0 if failed insert
 int HashTable::insert(string v)
 {
+    if (v.empty())
+    {
+        return 0; //don't insert empty strings
+    }
     int h = hash(v);
-    cout << "insert " << h << ": ";
+    //cout << "insert " << h << ": ";
     if (table[h].empty())
     {
-        cout << "easy insert" << endl;
+        //cout << "easy insert" << endl;
         table[h] = v; //insert to empty spot
         return 1;
     }
     else if (table[h] == v)
     {
-        cout << "duplicate " << v << endl;
+        //cout << "duplicate " << v << endl;
         return 1; //check if we're gonna insert duplicate, then avoid
     }
     else
@@ -75,14 +78,14 @@ int HashTable::insert(string v)
         {
             if (table[i].empty())
             {
-                cout << "insert via while at " << i << endl;
+                //cout << "insert via while at " << i << endl;
                 table[i] = v;      //insert to open spot
                 insertFlag = true; //set flag
                 break;
             }
             else if (table[i] == v)
             {
-                cout << "duplicate via while at " << i << endl;
+                //cout << "duplicate via while at " << i << endl;
                 return 1;
             }
             i++; //iterate
@@ -99,15 +102,6 @@ int HashTable::insert(string v)
     return 1;
 }
 
-string HashTable::getKey(int k)
-{
-    if (k >= size)
-    {
-        return NULL;
-    }
-    return table[k];
-}
-
 void HashTable::printTable()
 {
     for (int i = 0; i < size; i++)
@@ -118,12 +112,12 @@ void HashTable::printTable()
 
 void HashTable::part3a()
 {
-    int nonEmpty = 0;
+    int nonEmpty = 0; //stores the number of non-empty elements
     for (int i = 0; i < size; i++)
     {
         if (!table[i].empty())
         {
-            nonEmpty++;
+            nonEmpty++; //count the number of non-empty elements
         }
     }
 
@@ -216,22 +210,24 @@ void HashTable::part3c()
 
 void HashTable::part3d()
 {
-    int hashCount[size];
+    int hashCount[size]; //value is the counter, and the index is the hash
     for (int i = 0; i < size; i++)
+    {
         hashCount[i] = 0;
+    }
     for (int i = 0; i < size; i++)
     {
         if (!table[i].empty())
         {
-            hashCount[hash(table[i])]++;
+            hashCount[hash(table[i])]++; //increment at the index, where the index is the hashed value of the word we're on
         }
     }
-    int most = 0;
+    int most = 0; //store hash with most distinct words
     for (int i = 0; i < size; i++)
     {
         if (hashCount[i] > most)
         {
-            most = i;
+            most = i; //set maximum
         }
     }
     cout << "Part 3d:\nHash with most distinct words is " << most << " with " << hashCount[most] << " hashes." << endl;
@@ -240,27 +236,28 @@ void HashTable::part3d()
 void HashTable::part3e()
 {
 
-    int bestDiff = 0;
-    int diff = 0;
-    string bestWord = "";
-    string word = "";
-    int bestPos = 0;
-    bool isSeparated = false;
-    int currentHash = 0;
+    int bestDiff = 0;         //best difference
+    int diff = 0;             //current difference
+    string bestWord = "";     //best word
+    string word = "";         //current word
+    int bestPos = 0;          //best position
+    bool isSeparated = false; //is the hash of the word not equal to its position?
+    int currentHash = 0;      //hash of current item we're on (avoids repeated function calls)
     for (int i = 0; i < size; i++)
     {
         if (!table[i].empty())
         {
+            //set current hash and check if element is separated
             currentHash = hash(table[i]);
             isSeparated = (currentHash != i);
             if (isSeparated)
             {
-                diff = i - currentHash;
+                diff = i - currentHash; //the difference between the index of the word and what the index should be
                 if (diff > bestDiff)
                 {
-                    bestWord = table[i];
-                    bestDiff = diff;
-                    bestPos = i;
+                    bestWord = table[i]; //set the best word
+                    bestDiff = diff;     //set the best difference
+                    bestPos = i;         //set the best position (purely to print it)
                 }
             }
         }
