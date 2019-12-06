@@ -34,6 +34,7 @@ public:
 
     ~HashTable()
     {
+        delete table;
     }
 };
 
@@ -42,7 +43,7 @@ int HashTable::hash(string s)
     int ret = 0;
     for (int i = 0; i < s.length(); i++)
     {
-        ret += (ret * C + (int)s[i]) % size;
+        ret += (ret * C + (int)s[i]) % (size - 1);
     }
     return (ret % (size - 1));
 }
@@ -168,7 +169,7 @@ void HashTable::part3b()
             regionContinue = false; //region counting will resume at
         }
     }
-    cout << "Part 3b: \nThe largest region of empty space starts at " << bestStart << " and is " << bestSize << " long." << endl;
+    cout << "Part 3b:\nThe largest region of empty space starts at " << bestStart << " and is " << bestSize << " long." << endl;
 }
 
 void HashTable::part3c()
@@ -210,7 +211,7 @@ void HashTable::part3c()
             clusterContinue = false; //region counting will resume at
         }
     }
-    cout << "Part 3c: \nThe largest cluster starts at " << bigStart << " and is " << bigSize << " long." << endl;
+    cout << "Part 3c:\nThe largest cluster starts at " << bigStart << " and is " << bigSize << " long." << endl;
 }
 
 void HashTable::part3d()
@@ -233,9 +234,36 @@ void HashTable::part3d()
             most = i;
         }
     }
-    cout << "Part 3d: \nHash with most distinct words is " << most << " with " << hashCount[most] << " hashes." << endl;
+    cout << "Part 3d:\nHash with most distinct words is " << most << " with " << hashCount[most] << " hashes." << endl;
 }
 
 void HashTable::part3e()
 {
+
+    int bestDiff = 0;
+    int diff = 0;
+    string bestWord = "";
+    string word = "";
+    int bestPos = 0;
+    bool isSeparated = false;
+    int currentHash = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (!table[i].empty())
+        {
+            currentHash = hash(table[i]);
+            isSeparated = (currentHash != i);
+            if (isSeparated)
+            {
+                diff = i - currentHash;
+                if (diff > bestDiff)
+                {
+                    bestWord = table[i];
+                    bestDiff = diff;
+                    bestPos = i;
+                }
+            }
+        }
+    }
+    cout << "Part3e:\nThe word farthest from actual hash is \"" << bestWord << "\" with a difference of " << bestDiff << " away from " << bestPos << "." << endl;
 }

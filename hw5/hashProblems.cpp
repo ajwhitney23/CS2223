@@ -15,16 +15,12 @@ vector<string> readRaven()
     myfile.open("Raven.txt");
     vector<string> words;
     string temp;
-    while (getline(myfile, temp, '\n'))
+    while (myfile >> temp)
     {
-        string buffer;
-        stringstream ss(temp);
-        while (ss >> buffer)
-        {
-            words.push_back(buffer);
-        }
+        words.push_back(temp);
     }
-    char symbols[] = {'"', '.', '-', ',', ';', ':', '!', '?', '\n'};
+    myfile.close();
+    char symbols[] = {'"', '.', '-', ',', ';', ':', '!', '?'};
     int l = strlen(symbols);
     for (int i = 0; i < words.size(); i++)
     {
