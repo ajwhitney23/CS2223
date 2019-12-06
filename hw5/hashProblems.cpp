@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -12,7 +13,7 @@ using namespace std;
 vector<string> readRaven()
 {
     fstream myfile;
-    myfile.open("Raven.txt");
+    myfile.open("Raven.txt", ios::in);
     vector<string> words;
     string temp;
     while (myfile >> temp)
@@ -33,7 +34,6 @@ vector<string> readRaven()
         if (words[i].empty())
         {
             words.erase(words.begin() + i);
-            i--;
         }
     }
     return words;
@@ -45,7 +45,7 @@ int main()
     HashTable t = HashTable(1000);
     for (int i = 0; i < words.size(); i++)
     {
-        cout << i << " " << words[i] << " ";
+        //cout << i << " " << words[i] << " ";
         t.insert(words[i]);
     }
     t.printTable();
