@@ -24,7 +24,7 @@ vector<string> readRaven()
 
     //removes undesireable symbols
     char symbols[] = {'\"', '.', '-', ',', ';', ':', '!', '?'};
-    int l = strlen(symbols);
+    int l = 8;
     for (int i = 0; i < words.size(); i++)
     {
         for (int j = 0; j < l; j++)
@@ -34,6 +34,7 @@ vector<string> readRaven()
         if (words[i].empty())
         {
             words.erase(words.begin() + i);
+            i--;
         }
     }
     return words;
