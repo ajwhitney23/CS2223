@@ -7,4 +7,4 @@ p4: dijkstra.cpp
 	g++ dijkstra.cpp -o p4
 
 clean:
-	rm -f *.o p1
+	rm -f *.o p1 p4
