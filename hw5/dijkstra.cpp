@@ -17,10 +17,9 @@ int hasBeen[10];       //checks if node has been visited
 void initializeGraph();
 void parseGraph();
 void printArray();
-void findMin(int i);
+void findMin();
 void dijkstra(int src, int dest);
 void printSolution();
-void findMin2();
 
 int main(int argc, char **argv)
 {
@@ -82,37 +81,47 @@ void dijkstra(int src, int dest)
 {
     for (int i = 0; i < 10; i++)
     {
-        pathCost[i] = MAX_COST;     
+        pathCost[i] = MAX_COST;
         hasBeen[i] = 0;
     }
-
+    /*
     pathCost[0] = 0;        //pathCost from start will always be 0
     pathCostNodes[0] = src; //first node is src
     hasBeen[src] = 1;
+    */
+   pathCost[src] = 0;
 
     for (int j = 0; j < 9; j++)
     {
+        findMin();
+        /*
         int minCost = MAX_COST;
         int next;
         for (int i = 0; i < 10; i++)
         {
-            if (pathCost[i] <= minCost && !hasBeen[i])
+            if ((pathCost[i] <= minCost) && !hasBeen[i])
             {
+                cout << "entered" << endl;
                 minCost = pathCost[i];
+                cout << minCost << endl;
                 next = i;
-                if(next == dest)
+                cout << next << endl;
+                /*
+                if(next == a)
                 {
                     i = 10;
                 }
+                
             }
         }
         hasBeen[next] = 1;
         for(int i = 0; i < 10; i++)
         {
-            if(hasBeen[dest])
-            {
-                break;
-            }
+            //if(hasBeen[a])
+            //{
+            //    cout << "hasBeen[a]" << endl;
+            //    break;
+            //}
             if(!hasBeen[i] && (minCost + aGraph[next][i] < pathCost[i])
                 && aGraph[next][i])
             {
@@ -120,28 +129,13 @@ void dijkstra(int src, int dest)
                 pathCostNodes[i] = next;
             }
         }
+        */
     }
-    /*
-    for(int i = 0; i < 10; i++)
-    {
-        if(i != src)
-        {
-            cout << "Distance of node " << i << " is " << pathCost[i] << endl;
-            cout << "Path is " << i << endl;
-            int j = i;
-            do {
-                j = pathCostNodes[j];
-                cout << " <-- " << j;
-            } while(j!=src);
-            cout << endl;
-        }
-    }
-    */
    printSolution();
 }
 
 //old function
-void findMin(int temp)
+void findMin()
 {
     int min = MAX_COST;
     int tempNode;
@@ -155,22 +149,22 @@ void findMin(int temp)
         }
     }
     hasBeen[tempNode] = 1;
-    pathCostNodes[temp] = tempNode;
+    pathCostNodes[tempNode] = tempNode;
     for (int k = 0; k < 10; k++)
     {
-        cout << pathCost[tempNode] << endl;
         if (!hasBeen[k] && aGraph[tempNode][k] && (pathCost[tempNode] != MAX_COST) &&
             (pathCost[tempNode] + aGraph[tempNode][k] < pathCost[k]))
         //if hasn't been @ k and there is a value on graph and pathCost at tempNode isnt MAX_COST and
         {
             pathCost[k] = pathCost[tempNode] + aGraph[tempNode][k];
-            pathCostNodes[temp] = tempNode;
+            pathCostNodes[tempNode] = tempNode;
         }
     }
 }
 
 void printSolution()
 {
+    cout << endl << endl;
     for (int i = 0; i < 10; i++)
     {
         cout << pathCostNodes[i] << " ";
