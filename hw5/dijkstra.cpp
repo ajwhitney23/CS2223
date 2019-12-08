@@ -144,22 +144,28 @@ void findMin()
     {
         if (!hasBeen[i] && (pathCost[i] <= min)) //hasn't been and if pathCost at that spot is <= min
         {
+            //cout << "entered if due to "<< i << endl;
             min = pathCost[i];
             tempNode = i;
         }
     }
+    cout << "node being stored " << tempNode << endl;
     hasBeen[tempNode] = 1;
     pathCostNodes[tempNode] = tempNode;
+    int temp;
     for (int k = 0; k < 10; k++)
     {
         if (!hasBeen[k] && aGraph[tempNode][k] && (pathCost[tempNode] != MAX_COST) &&
             (pathCost[tempNode] + aGraph[tempNode][k] < pathCost[k]))
         //if hasn't been @ k and there is a value on graph and pathCost at tempNode isnt MAX_COST and
         {
+            temp = k;
             pathCost[k] = pathCost[tempNode] + aGraph[tempNode][k];
             pathCostNodes[tempNode] = tempNode;
         }
     }
+    cout << "node being stored " << tempNode << endl;
+    cout << "value " << pathCost[temp] << endl;
 }
 
 void printSolution()
