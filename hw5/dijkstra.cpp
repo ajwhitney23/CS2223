@@ -7,18 +7,20 @@
 #include <cstdlib>
 using namespace std;
 
-int aGrid[10][10];    //grid read in from text
-//int outputNode[10];
-int output[10];       //output array
-int shortestPath[10]; //name of vertext of shortest path
+#define MAX_COST 999
 
-void initializeGrid();
-void parseGrid();
+int aGraph[10][10];    //grid read in from text
+int pathCost[10];      //cost after i steps
+int pathCostNodes[10]; //stores the path nodes
+int hasBeen[10];       //checks if node has been visited
+
+void initializeGraph();
+void parseGraph();
 void printArray();
-void findMin();
+void findMin(int i);
 void dijkstra(int src, int dest);
-void printSolution(); 
-
+void printSolution();
+void findMin2();
 
 int main(int argc, char **argv)
 {
@@ -28,13 +30,13 @@ int main(int argc, char **argv)
     cin >> src;
     cout << "Enter the destination: " << endl;
     cin >> dest;
-    initializeGrid();
-    parseGrid();
+    initializeGraph();
+    parseGraph();
     dijkstra(src, dest);
     return 0;
 }
 
-void initializeGrid()
+void initializeGraph()
 {
     int i;
     int j;
@@ -42,12 +44,12 @@ void initializeGrid()
     {
         for (j = 0; j < 10; j++)
         {
-            aGrid[i][j] = 0;
+            aGraph[i][j] = 0;
         }
     }
 }
 
-void parseGrid()
+void parseGraph()
 {
     fstream file;          //create file stream
     file.open("grid.txt"); //open text file to be read
@@ -57,7 +59,7 @@ void parseGrid()
     {
         for (j = 0; j < 10; j++)
         {
-            file >> aGrid[i][j]; //read file into the array
+            file >> aGraph[i][j]; //read file into the array
         }
     }
     file.close(); //close now that we are done
@@ -70,7 +72,7 @@ void printArray()
     {
         for (int j = 0; j < 10; j++)
         {
-            cout << aGrid[i][j] << " ";
+            cout << aGraph[i][j] << " ";
         }
         cout << endl;
     }
@@ -80,49 +82,103 @@ void dijkstra(int src, int dest)
 {
     for (int i = 0; i < 10; i++)
     {
-        output[i] = 999;
-        shortestPath[i] = 0;
+        pathCost[i] = MAX_COST;     
+        hasBeen[i] = 0;
     }
-    output[src] = 0;
-    // outputNode[src] = src;
 
-    for(int j = 0; j < 9; j++)
+    pathCost[0] = 0;        //pathCost from start will always be 0
+    pathCostNodes[0] = src; //first node is src
+    hasBeen[src] = 1;
+
+    for (int j = 0; j < 9; j++)
     {
-        findMin();
+        int minCost = MAX_COST;
+        int next;
+        for (int i = 0; i < 10; i++)
+        {
+            if (pathCost[i] <= minCost && !hasBeen[i])
+            {
+                minCost = pathCost[i];
+                next = i;
+                if(next == dest)
+                {
+                    i = 10;
+                }
+            }
+        }
+        hasBeen[next] = 1;
+        for(int i = 0; i < 10; i++)
+        {
+            if(hasBeen[dest])
+            {
+                break;
+            }
+            if(!hasBeen[i] && (minCost + aGraph[next][i] < pathCost[i])
+                && aGraph[next][i])
+            {
+                pathCost[i] = minCost + aGraph[next][i];
+                pathCostNodes[i] = next;
+            }
+        }
     }
-    printSolution();
+    /*
+    for(int i = 0; i < 10; i++)
+    {
+        if(i != src)
+        {
+            cout << "Distance of node " << i << " is " << pathCost[i] << endl;
+            cout << "Path is " << i << endl;
+            int j = i;
+            do {
+                j = pathCostNodes[j];
+                cout << " <-- " << j;
+            } while(j!=src);
+            cout << endl;
+        }
+    }
+    */
+   printSolution();
 }
 
-void findMin()
+//old function
+void findMin(int temp)
 {
-    int min = 999;
+    int min = MAX_COST;
     int tempNode;
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++) //go through each node
     {
-        if (shortestPath[i] == 0 && output[i] <= min)
+        if (!hasBeen[i] && (pathCost[i] <= min)) //hasn't been and if pathCost at that spot is <= min
         {
-            min = output[i];
+            min = pathCost[i];
             tempNode = i;
         }
     }
-    shortestPath[tempNode] = 1;
+    hasBeen[tempNode] = 1;
+    pathCostNodes[temp] = tempNode;
     for (int k = 0; k < 10; k++)
     {
-        if (!shortestPath[k] && aGrid[tempNode][k] && output[tempNode] != 999 && 
-            output[tempNode] + aGrid[tempNode][k] < output[k])
+        cout << pathCost[tempNode] << endl;
+        if (!hasBeen[k] && aGraph[tempNode][k] && (pathCost[tempNode] != MAX_COST) &&
+            (pathCost[tempNode] + aGraph[tempNode][k] < pathCost[k]))
+        //if hasn't been @ k and there is a value on graph and pathCost at tempNode isnt MAX_COST and
         {
-            output[k] = output[tempNode] + aGrid[tempNode][k];
-            // outputNode[k] = tempNode;
-        }  
+            pathCost[k] = pathCost[tempNode] + aGraph[tempNode][k];
+            pathCostNodes[temp] = tempNode;
+        }
     }
 }
 
-void printSolution() 
-{ 
-    printf("Vertex \t\t Distance from Source\n"); 
+void printSolution()
+{
     for (int i = 0; i < 10; i++)
     {
-        printf("%d \t\t %d\n", i, output[i]);
-    }  
+        cout << pathCostNodes[i] << " ";
+    }
+    cout << endl;
+    for (int j = 0; j < 10; j++)
+    {
+        cout << pathCost[j] << " ";
+    }
+    cout << endl;
 }
