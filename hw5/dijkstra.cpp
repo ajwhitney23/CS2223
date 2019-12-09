@@ -21,9 +21,6 @@ void findMin();
 void dijkstra(int src, int dest);
 void printSolution();
 
-int prevNodes[10];
-int cost[10];
-
 int main(int argc, char **argv)
 {
     int src;
