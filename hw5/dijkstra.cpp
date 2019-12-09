@@ -21,6 +21,9 @@ void findMin();
 void dijkstra(int src, int dest);
 void printSolution();
 
+int prevNodes[10];
+int cost[10];
+
 int main(int argc, char **argv)
 {
     int src;
@@ -84,57 +87,16 @@ void dijkstra(int src, int dest)
         pathCost[i] = MAX_COST;
         hasBeen[i] = 0;
     }
-    /*
-    pathCost[0] = 0;        //pathCost from start will always be 0
-    pathCostNodes[0] = src; //first node is src
-    hasBeen[src] = 1;
-    */
+
    pathCost[src] = 0;
 
     for (int j = 0; j < 9; j++)
     {
         findMin();
-        /*
-        int minCost = MAX_COST;
-        int next;
-        for (int i = 0; i < 10; i++)
-        {
-            if ((pathCost[i] <= minCost) && !hasBeen[i])
-            {
-                cout << "entered" << endl;
-                minCost = pathCost[i];
-                cout << minCost << endl;
-                next = i;
-                cout << next << endl;
-                /*
-                if(next == a)
-                {
-                    i = 10;
-                }
-                
-            }
-        }
-        hasBeen[next] = 1;
-        for(int i = 0; i < 10; i++)
-        {
-            //if(hasBeen[a])
-            //{
-            //    cout << "hasBeen[a]" << endl;
-            //    break;
-            //}
-            if(!hasBeen[i] && (minCost + aGraph[next][i] < pathCost[i])
-                && aGraph[next][i])
-            {
-                pathCost[i] = minCost + aGraph[next][i];
-                pathCostNodes[i] = next;
-            }
-        }
-        */
     }
    printSolution();
 }
 
-//old function
 void findMin()
 {
     int min = MAX_COST;
@@ -149,7 +111,6 @@ void findMin()
             tempNode = i;
         }
     }
-    cout << "node being stored " << tempNode << endl;
     hasBeen[tempNode] = 1;
     pathCostNodes[tempNode] = tempNode;
     int temp;
@@ -164,18 +125,20 @@ void findMin()
             pathCostNodes[tempNode] = tempNode;
         }
     }
-    cout << "node being stored " << tempNode << endl;
-    cout << "value " << pathCost[temp] << endl;
+    //cout << "node being stored " << tempNode << endl;
+    //cout << "value " << pathCost[temp] << endl;
 }
 
 void printSolution()
 {
     cout << endl << endl;
+    cout << "Order: ";
     for (int i = 0; i < 10; i++)
     {
         cout << pathCostNodes[i] << " ";
     }
     cout << endl;
+    cout << "Values: ";
     for (int j = 0; j < 10; j++)
     {
         cout << pathCost[j] << " ";
