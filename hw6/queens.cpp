@@ -120,6 +120,7 @@ int main(int argc, char **argv)
     cin >> n;
     int array[n];
     cout << "enter the queens x postions below(one at a time): " << endl;
+    cout << "NOTE: if you do not wish to place a queen type 0!!!" << endl;
     int temp;
     for (int i = 0; i < n; i++)
     {
