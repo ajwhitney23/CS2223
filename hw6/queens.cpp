@@ -83,10 +83,13 @@ int main(int argc, char **argv)
     cin >> n;
     int array[n];
     cout << "enter the queens x postions below(one at a time): " << endl;
+    int temp;
     for(int i = 0; i < n; i++)
     {
-        cout << "x position: " << endl;
-        cin >> array[i];
+        cout << i+1 << " row column position: " << endl;
+        cin >> temp;
+        temp = temp - 1;
+        array[i] = temp;
     }
 
     int *board[n];
@@ -106,13 +109,16 @@ int main(int argc, char **argv)
         if(x)
         {
             placeQueen(row, col, board);
+            cout << row << ", " << col << " is a legal position" << endl;
         }
         else
         {
-            cout << row << ", " << col << " is not legal position" << endl;
+            cout << row << ", " << col << " is not a legal position" << endl;
         }
     }
-
-    free(board);
+    for(int i = 0; i < n; i++)
+    {
+        free(board[i]);
+    }
     return 0;
 }
