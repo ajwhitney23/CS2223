@@ -78,13 +78,16 @@ bool isLegalPosition(int *array[], int row, int col, int n)
 
 int main(int argc, char **argv)
 {
-    cout << "enter the queens x postion" << endl;
     int n;
     cout << "enter the size of the board" << endl;
     cin >> n;
-    cout << "enter the queens x postion" << endl;
-    //input array
     int array[n];
+    cout << "enter the queens x postions below(one at a time): " << endl;
+    for(int i = 0; i < n; i++)
+    {
+        cout << "x position: " << endl;
+        cin >> array[i];
+    }
 
     int *board[n];
     for(int i = 0; i<n; i++)
