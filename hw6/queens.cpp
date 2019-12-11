@@ -27,51 +27,48 @@ void make2DArray(int array[], int n)
 }
 */
 
-void placeQueen(int row, int col, int array[])
+void placeQueen(int row, int col, int *array[])
 {
-
+    array[row][col] = 1;
 }
 
-bool isLegalPosition(int array[], int row, int col, int n)
+bool isLegalPosition(int *array[], int row, int col, int n)
 {
-    //parse through each column checking to see how many queens are in each column, cant be more than 1
-    for (int i = 0; i < n; i++)
+    //parse through the column checking to see how many queens are in each column, cant be more than 1
+    int count = 0;
+    for(int i = 0; i < n; i++)
     {
-        int count = 0;
-        for (int j = 0; j < n; j++)
+        if(array[i][col])
         {
-            if (array[j][i])
+            count++;
+        }
+    }
+    if(!count)
+    {
+        count = 0;
+        for(int i = 0; i < n; i++)
+        {
+            if(array[i][col])
             {
                 count++;
             }
         }
-        if (count >= 2)
+        if(!count)
         {
-            return false;
-        }
-    }
-    //parse through each row checking to see how many queens are in each row, cant be more than 1
-    for(int i = 0; i < n; i++)
-    {
-        int count = -1;
-        for(int j = 0; j < n; j++)
-        {
-            if(array[i][j])
+            count = 0;
+            //check pos diag
+            if(!count)
             {
-                count++;
+                count = 0;
+                //check neg diag
+                if(!count)
+                {
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
-        }
-        if(count)
-        {
-            return false;
-        }
-    }
-    //find way to iterate through and check diag.
-    for(int i = 0; i < n; i++)
-    {
-        for(int j = 0; j < n; j++)
-        {
-
         }
     }
     
@@ -81,19 +78,31 @@ bool isLegalPosition(int array[], int row, int col, int n)
 
 int main(int argc, char **argv)
 {
+    cout << "enter the queens x postion" << endl;
     int n;
+    cout << "enter the size of the board" << endl;
+    cin >> n;
+    cout << "enter the queens x postion" << endl;
+    //input array
     int array[n];
+
+    int *board[n];
+    for(int i = 0; i<n; i++)
+    {
+        board[i] = (int *)malloc(n * sizeof(int));
+    }
+
     int row;
     int col;
-
+    
     for(int i = 0; i < n; i++)
     {
         col = array[i];
         row = i;
-        int x = isLegalPosition(board, row, col, n);
+        bool x = isLegalPosition(board, row, col, n);
         if(x)
         {
-            placeQueen(row, col);
+            placeQueen(row, col, board);
         }
         else
         {
@@ -101,13 +110,6 @@ int main(int argc, char **argv)
         }
     }
 
-    if (x)
-    {
-        cout << "it is a legal position" << endl;
-    }
-    if (!x)
-    {
-        cout << "it is not a legal position" << endl;
-    }
+    free(board);
     return 0;
 }
