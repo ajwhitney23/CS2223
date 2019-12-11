@@ -57,10 +57,38 @@ bool isLegalPosition(int *array[], int row, int col, int n)
         {
             count = 0;
             //check pos diag
+            for(int i = row, j = col; i >= 0 && j >= 0; i--, j--)
+            {
+                if(array[i][j])
+                {
+                    count++;
+                }
+            }
+            for(int i = row, j = col; i < n && j < n; i++, j++)
+            {
+                if(array[i][j])
+                {
+                    count++;
+                }
+            }
             if(!count)
             {
                 count = 0;
                 //check neg diag
+                for(int i = row, j = col; j >= 0 && i < n; i++, j--)
+                {
+                    if(array[i][j])
+                    {
+                        count++;
+                    }
+                }
+                for(int i = row, j = col; j < n && i >= 0; i--, j++)
+                {
+                    if(array[i][j])
+                    {
+                        count++;
+                    }
+                }
                 if(!count)
                 {
                     return true;
@@ -69,8 +97,23 @@ bool isLegalPosition(int *array[], int row, int col, int n)
                     return false;
                 }
             }
+            else
+            {
+                return false;
+            }
+            
         }
+        else
+        {
+            return false;
+        }
+        
     }
+    else
+    {
+        return false;
+    }
+    
     
 
 
