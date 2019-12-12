@@ -114,42 +114,42 @@ bool isLegalPosition(int *array[], int row, int col, int n)
 }
 */
 
-bool isLegalPosition(int *array[], int row, int col, int n)
+int isLegalPosition(int *array[], int row, int col, int n)
 {
     //parse through the column checking to see how many queens are in each column, cant be more than 1
     for (int i = 0; i < n; i++)
     {
         if (array[i][col])
         {
-            return false;
+            return 0;
         }
     }
     for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) //check down and to the left
     {
         if (array[i][j])
         {
-            return false;
+            return 0;
         }
     }
     for (int i = row, j = col; i < n && j < n; i++, j++) //check up and to the right
     {
         if (array[i][j])
         {
-            return false;
+            return 0;
         }
     }
     for (int i = row, j = col; j >= 0 && i < n; i++, j--)  //check up and to the left
     {
         if (array[i][j])
         {
-            return false;
+            return 0;
         }
     }
     for (int i = row, j = col; j < n && i >= 0; i--, j++)  //check down and to the right
     {
         if (array[i][j])
         {
-            return false;
+            return 0;
         }
     }
 }
@@ -157,23 +157,28 @@ bool isLegalPosition(int *array[], int row, int col, int n)
 //find the next legal position
 int nextLegalPosition(int *array[], int row, int col, int n)
 {
-    int ret = col;
-    if (ret == -1)
+    if(col == -1)
     {
-        ret = 0;
+        cout << "col = -1" << endl;
+        col = 0;
+        cout << col << endl;
     }
-    if (isLegalPosition(array, row, ret, n) == false) //if isnt legal
+    if(!isLegalPosition(array, row, col, n))
     {
-        cout << "false" << endl;
-        //while (!isLegalPosition(array, row, ret, n)) //go through each column checking if legal, once it is legal, exit loop
-        int temp;
-        for(ret = 0; (isLegalPosition(array, row, ret, n) == false) && (ret < n); ret++)
+        col = 0;
+        while((!isLegalPosition(array, row, col, n)) && (col < (n-1)))
         {
-            temp = ret;
+            col++;
         }
-        ret = temp;
     }
-    return ret; //return column number
+    if(isLegalPosition(array, row, col, n))
+    {
+        return col;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 int main(int argc, char **argv)
@@ -227,7 +232,7 @@ int main(int argc, char **argv)
             row = i;
             if (col != -1)
             {
-                bool x = isLegalPosition(board, row, col, n);
+                int x = isLegalPosition(board, row, col, n);
                 if (x)
                 {
                     placeQueen(row, col, board);
@@ -242,12 +247,10 @@ int main(int argc, char **argv)
     }
     if (p == 2)
     {   
-        int temp;
         for (int i = 0; i < n; i++)
         {
-            temp = array[i];
-            col = nextLegalPosition(board, row, temp, n);
             row = i;
+            col = nextLegalPosition(board, row, array[i], n);
             if (col != -1)
             {
                 placeQueen(row, col, board);
