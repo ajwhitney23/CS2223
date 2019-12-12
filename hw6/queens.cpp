@@ -2,36 +2,81 @@
 #include <iostream>
 using namespace std;
 
-int isTrue[4] = {3, 1, 4, 2};
-int isFalse[4] = {1, 2, 3, 4};
-
-/*
-void make2DArray(int array[], int n)
-{
-    int array[n][n];
-    for (int j = 0; j < n; j++)
-    {
-        for (int k = 0; k < n; k++)
-        {
-            if ((k + 1) == array[j])
-            {
-                board[j][k] = 1;
-            }
-            else
-            {
-                board[j][k] = 0;
-            }
-        }
-    }
-}
-*/
-
 void placeQueen(int row, int col, int *array[])
 {
     array[row][col] = 1;
 }
 
+void initializeBoard(int *array[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            array[i][j] = 0;
+        }
+    }
+}
+
+void printBoard(int *array[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            cout << (array[i][j] ? 'Q' : '-') << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
 int isLegalPosition(int *array[], int row, int col, int n)
+{
+    if (col >= n)
+    {
+        return 0;
+    }
+    //parse through the column checking to see how many queens are in each column, cant be more than 1
+    for (int i = 0; i < n; i++)
+    {
+        if (array[i][col])
+        {
+            return 0;
+        }
+    }
+    for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) //check up and to the left
+    {
+        if (array[i][j])
+        {
+            return 0;
+        }
+    }
+    for (int i = row, j = col; j < n && i >= 0; i--, j++) //check up and to the right
+    {
+        if (array[i][j])
+        {
+            return 0;
+        }
+    }
+    for (int i = row, j = col; i < n && j < n; i++, j++) //check down and to the right
+    {
+        if (array[i][j])
+        {
+            return 0;
+        }
+    }
+    for (int i = row, j = col; j >= 0 && i < n; i++, j--) //check down and to the left
+    {
+        if (array[i][j])
+        {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int isLegalPositionOnlyUp(int *array[], int row, int col, int n)
 {
     if (col >= n)
     {
@@ -59,22 +104,6 @@ int isLegalPosition(int *array[], int row, int col, int n)
             return 0;
         }
     }
-    /*
-    for (int i = row, j = col; i < n && j < n; i++, j++) //check down and to the right
-    {
-        if (array[i][j])
-        {
-            return 0;
-        }
-    }
-    for (int i = row, j = col; j >= 0 && i < n; i++, j--) //check down and to the left
-    {
-        if (array[i][j])
-        {
-            return 0;
-        }
-    }
-    */
 
     return 1;
 }
@@ -126,7 +155,7 @@ int makeMove(int *array[], int row, int n)
     {
         for (int i = 0; i < n; i++)
         {
-            int valid = isLegalPosition(array, row, i, n);
+            int valid = isLegalPositionOnlyUp(array, row, i, n);
             if (valid)
             {
                 placeQueen(row, i, array);
@@ -148,26 +177,30 @@ int makeMove(int *array[], int row, int n)
     }
 }
 
-void initializeBoard(int *array[], int n)
+int findAllSolutions(int *array[], int row, int n)
 {
-    for (int i = 0; i < n; i++)
+    if (row >= n)
     {
-        for (int j = 0; j < n; j++)
-        {
-            array[i][j] = 0;
-        }
+        printBoard(array, n);
+        return 1; //we want to go down all alternate branches, so bounce back
     }
-}
-
-void printBoard(int *array[], int n)
-{
-    for (int i = 0; i < n; i++)
+    else
     {
-        for (int j = 0; j < n; j++)
+        int acc = 0;
+        for (int i = 0; i < n; i++)
         {
-            cout << (array[i][j] ? 'Q' : '-') << " ";
+            int valid = isLegalPositionOnlyUp(array, row, i, n);
+            if (valid)
+            {
+                placeQueen(row, i, array);
+                acc += findAllSolutions(array, row + 1, n);
+                clearRow(array, row, n);
+            }
         }
-        cout << endl;
+
+        //if control flow reaches here, we didn't find a legal position for current row
+        //in that case, return 0 and recursion will take care of the rest
+        return acc;
     }
 }
 
@@ -267,6 +300,25 @@ int main(int argc, char **argv)
             cout << i << endl;
             printBoard(secondBoard, i);
         }
+        for (int i = 0; i < n; i++)
+        {
+            free(board[i]);
+        }
+    }
+    if (p == 4)
+    {
+        cout << n << endl;
+        int *secondBoard[n];
+        for (int i = 0; i < n; i++)
+        {
+            secondBoard[i] = (int *)malloc(n * sizeof(int));
+        }
+
+        initializeBoard(secondBoard, n);
+        printBoard(secondBoard, n);
+        int solutions = findAllSolutions(secondBoard, 0, n);
+        cout << solutions << endl;
+
         for (int i = 0; i < n; i++)
         {
             free(board[i]);
