@@ -71,6 +71,34 @@ int isLegalPosition(int *array[], int row, int col, int n)
     }
 }
 
+
+//find the next legal position
+int nextLegalPosition(int *array[], int row, int col, int n)
+{
+    if (col == -1)
+    {
+        cout << "col = -1" << endl;
+        col = 0;
+        cout << col << endl;
+    }
+    if (!isLegalPosition(array, row, col, n))
+    {
+        col = 0;
+        while ((!isLegalPosition(array, row, col, n)) && (col < (n - 1)))
+        {
+            col++;
+        }
+    }
+    if (isLegalPosition(array, row, col, n))
+    {
+        return col;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 //TODO: recursive function that branches per row to find first legal position
 //clear row if solution not found and we backtrack
 int makeMove(int *array[], int row, int n, int userInput[])
@@ -113,30 +141,15 @@ int makeMove(int *array[], int row, int n, int userInput[])
     }
 }
 
-//find the next legal position
-int nextLegalPosition(int *array[], int row, int col, int n)
+void printBoard(int *array[], int n)
 {
-    if (col == -1)
+    for(int i = 0; i < n; i++)
     {
-        cout << "col = -1" << endl;
-        col = 0;
-        cout << col << endl;
-    }
-    if (!isLegalPosition(array, row, col, n))
-    {
-        col = 0;
-        while ((!isLegalPosition(array, row, col, n)) && (col < (n - 1)))
+        for(int j = 0; j < n; j++)
         {
-            col++;
+            cout << array[i][j] << " ";
         }
-    }
-    if (isLegalPosition(array, row, col, n))
-    {
-        return col;
-    }
-    else
-    {
-        return -1;
+        cout << endl;
     }
 }
 
@@ -224,6 +237,10 @@ int main(int argc, char **argv)
     if (p == 3)
     {
         int x = makeMove(board, 0, n, input);
+        if(x > 0)
+        {
+            printBoard(board, n);
+        }
     }
     if (p == 0)
     {
