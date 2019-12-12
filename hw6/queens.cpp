@@ -33,42 +33,49 @@ void placeQueen(int row, int col, int *array[])
 
 int isLegalPosition(int *array[], int row, int col, int n)
 {
+    if (col >= n)
+    {
+        return 0;
+    }
     //parse through the column checking to see how many queens are in each column, cant be more than 1
-    for (int i = 0; i < n; i++)
+    for (int i = row; i >= 0; i--)
     {
         if (array[i][col])
         {
             return 0;
         }
     }
-    for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) //check down and to the left
+    for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) //check up and to the left
     {
         if (array[i][j])
         {
             return 0;
         }
     }
-    for (int i = row, j = col; i < n && j < n; i++, j++) //check up and to the right
+    for (int i = row, j = col; j < n && i >= 0; i--, j++) //check up and to the right
     {
         if (array[i][j])
         {
             return 0;
         }
     }
-    for (int i = row, j = col; j >= 0 && i < n; i++, j--) //check up and to the left
+    /*
+    for (int i = row, j = col; i < n && j < n; i++, j++) //check down and to the right
     {
         if (array[i][j])
         {
             return 0;
         }
     }
-    for (int i = row, j = col; j < n && i >= 0; i--, j++) //check down and to the right
+    for (int i = row, j = col; j >= 0 && i < n; i++, j--) //check down and to the left
     {
         if (array[i][j])
         {
             return 0;
         }
     }
+    */
+
     return 1;
 }
 
@@ -119,8 +126,8 @@ int makeMove(int *array[], int row, int n)
     {
         for (int i = 0; i < n; i++)
         {
-            int legal = isLegalPosition(array, row, i, n);
-            if (legal)
+            int valid = isLegalPosition(array, row, i, n);
+            if (valid)
             {
                 placeQueen(row, i, array);
                 int result = makeMove(array, row + 1, n);
@@ -139,60 +146,6 @@ int makeMove(int *array[], int row, int n)
         //in that case, return 0 and recursion will take care of the rest
         return 0;
     }
-
-    /*
-    if (row >= n)
-    {
-        return 1; //we recursed past the end of the board, return 1 for successful
-    }
-    int col;
-    if (userInput[row] != -1) //user input hasnt been placed yet
-    {
-        col = userInput[row]; //place user input
-        userInput[row] = -1;
-    }
-    else //user input has been placed or user didnt input one
-    {
-        for (int i = 0; i < n; i++)
-        {
-            if (array[row][i]) //if queen is already placed, get spot and set row to 0
-            {
-                col = i;
-            }
-            array[row][i] = 0;
-        }
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        int temp;
-        temp = nextLegalPosition(array, row, col, n);
-        if (temp == -1) //no legal moves left
-        {
-            return 0; //we found no legal moves on this path
-        }
-        else
-        {
-            //place at next legal position and go next row
-            placeQueen(row, temp, array);
-            int result = makeMove(array, row + 1, n, userInput);
-            if (result =)
-        }
-    }
-    int temp;
-    temp = nextLegalPosition(array, row, col, n);
-    if (temp == -1) //no legal moves left
-    {
-        return 0; //we found no legal moves on this path
-    }
-    else
-    {
-        //place at next legal position and go next row
-        placeQueen(row, temp, array);
-        int result = makeMove(array, row + 1, n, userInput);
-        if (result =)
-    }
-    */
 }
 
 void initializeBoard(int *array[], int n)
