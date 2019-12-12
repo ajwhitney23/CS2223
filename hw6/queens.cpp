@@ -204,12 +204,9 @@ int findAllSolutions(int *array[], int row, int n)
     }
 }
 
-int main(int argc, char **argv)
+void getInputNums(int *array[], int input[], int n)
 {
-    int n;
-    cout << "enter the size of the board" << endl;
-    cin >> n;
-    int input[n];
+
     cout << "enter the queens x postions below(one at a time): " << endl;
     cout << "NOTE: if you do not wish to place a queen type 0!!!" << endl;
     int temp;
@@ -227,28 +224,28 @@ int main(int argc, char **argv)
             input[i] = -1;
         }
     }
+    return;
+}
 
+int main(int argc, char **argv)
+{
+
+    int part = atoi(argv[1]);
+    int n = atoi(argv[2]);
+    int input[n];
     int *board[n];
     for (int i = 0; i < n; i++)
     {
         board[i] = (int *)malloc(n * sizeof(int));
     }
+    int row;           //part 1 & 2
+    int col;           //part 1 & 2
+    int solutions = 0; //used in part 4
 
-    int row;
-    int col;
-    int p = atoi(argv[1]);
-    /*
-    if(argc == 2)
+    switch (part)
     {
-        p = atoi(argv[1]);
-    }
-    else
-    {
-        p = 0;
-    }
-    */
-    if (p == 1)
-    {
+    case 1:
+        getInputNums(board, input, n);
         for (int i = 0; i < n; i++)
         {
             col = input[i];
@@ -267,9 +264,10 @@ int main(int argc, char **argv)
                 }
             }
         }
-    }
-    if (p == 2)
-    {
+        break;
+
+    case 2:
+        getInputNums(board, input, n);
         for (int i = 0; i < n; i++)
         {
             row = i;
@@ -284,50 +282,29 @@ int main(int argc, char **argv)
                 cout << "No legal position found at: " << row << " " << col << endl;
             }
         }
-    }
-    if (p == 3)
-    {
-        n = 100;
-        int *secondBoard[n];
-        for (int i = 0; i < n; i++)
-        {
-            secondBoard[i] = (int *)malloc(n * sizeof(int));
-        }
+        break;
+
+    case 3:
+        //board is constrained, enter 100 to check the performance based on instructions
         for (int i = 4; i < n; i++)
         {
-            initializeBoard(secondBoard, n);
-            makeMove(secondBoard, 0, i);
+            initializeBoard(board, n);
+            makeMove(board, 0, i);
             cout << i << endl;
-            printBoard(secondBoard, i);
+            printBoard(board, i);
         }
-        for (int i = 0; i < n; i++)
-        {
-            free(board[i]);
-        }
-    }
-    if (p == 4)
-    {
-        cout << n << endl;
-        int *secondBoard[n];
-        for (int i = 0; i < n; i++)
-        {
-            secondBoard[i] = (int *)malloc(n * sizeof(int));
-        }
-
-        initializeBoard(secondBoard, n);
-        printBoard(secondBoard, n);
-        int solutions = findAllSolutions(secondBoard, 0, n);
+        break;
+    case 4:
+        initializeBoard(board, n);
+        printBoard(board, n);
+        solutions = findAllSolutions(board, 0, n);
         cout << solutions << endl;
+        break;
 
-        for (int i = 0; i < n; i++)
-        {
-            free(board[i]);
-        }
-    }
-    if (p == 0)
-    {
-        cout << "Usage: ./queens <partnum>" << endl;
-        cout << "<partnum> = 1 or 2 or 3... etc" << endl;
+    default:
+        cout << "Useage: ./queens <partNumber> <boardSize>" << endl
+             << "partNumber can be an integer between 1-4" << endl;
+        break;
     }
     for (int i = 0; i < n; i++)
     {
