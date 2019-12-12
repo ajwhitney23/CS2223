@@ -31,7 +31,6 @@ void placeQueen(int row, int col, int *array[])
     array[row][col] = 1;
 }
 
-
 int isLegalPosition(int *array[], int row, int col, int n)
 {
     //parse through the column checking to see how many queens are in each column, cant be more than 1
@@ -74,36 +73,44 @@ int isLegalPosition(int *array[], int row, int col, int n)
 
 //TODO: recursive function that branches per row to find first legal position
 //clear row if solution not found and we backtrack
-int makeMove(int *array[], int row, int n)
+int makeMove(int *array[], int row, int n, int userInput[])
 {
     //clear row
-    if(row >= n) //if done
+    if (row >= n) //if done
     {
         return 1;
     }
     int col;
-    for(int i = 0; i < n; i++)
+    if (userInput[row] != -1) //user input hasnt been placed yet
     {
-        if(array[row][i]) //if queen is already placed
-        {
-            col = i;
-        }
-        array[row][i] = 0;
+        col = userInput[row];
+        userInput[row] = -1;
     }
+    else //user input has been placed or user didnt input one
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if (array[row][i]) //if queen is already placed
+            {
+                col = i;
+            }
+            array[row][i] = 0;
+        }
+    }
+
     int temp;
     temp = nextLegalPosition(array, row, col, n);
-    if(temp == -1)//no legal moves
+    if (temp == -1) //no legal moves
     {
         //make move row above
-        makeMove(array, row-1, n);
+        makeMove(array, row - 1, n, userInput);
     }
     else
     {
         //place and go next row
         placeQueen(row, temp, array);
-        return makeMove(array, row+1, n);
+        return makeMove(array, row + 1, n, userInput);
     }
-    
 }
 
 //find the next legal position
@@ -138,7 +145,7 @@ int main(int argc, char **argv)
     int n;
     cout << "enter the size of the board" << endl;
     cin >> n;
-    int array[n];
+    int input[n];
     cout << "enter the queens x postions below(one at a time): " << endl;
     cout << "NOTE: if you do not wish to place a queen type 0!!!" << endl;
     int temp;
@@ -149,11 +156,11 @@ int main(int argc, char **argv)
         if (temp)
         {
             temp = temp - 1;
-            array[i] = temp;
+            input[i] = temp;
         }
         else
         {
-            array[i] = -1;
+            input[i] = -1;
         }
     }
 
@@ -180,7 +187,7 @@ int main(int argc, char **argv)
     {
         for (int i = 0; i < n; i++)
         {
-            col = array[i];
+            col = input[i];
             row = i;
             if (col != -1)
             {
@@ -202,7 +209,7 @@ int main(int argc, char **argv)
         for (int i = 0; i < n; i++)
         {
             row = i;
-            col = nextLegalPosition(board, row, array[i], n);
+            col = nextLegalPosition(board, row, input[i], n);
             if (col != -1)
             {
                 placeQueen(row, col, board);
@@ -213,6 +220,10 @@ int main(int argc, char **argv)
                 cout << "No legal position found at: " << row << " " << col << endl;
             }
         }
+    }
+    if (p == 3)
+    {
+        int x = makeMove(board, 0, n, input);
     }
     if (p == 0)
     {
