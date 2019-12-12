@@ -30,89 +30,7 @@ void placeQueen(int row, int col, int *array[])
 {
     array[row][col] = 1;
 }
-/*
-bool isLegalPosition(int *array[], int row, int col, int n)
-{
-    //parse through the column checking to see how many queens are in each column, cant be more than 1
-    int count = 0;
-    for (int i = 0; i < n; i++)
-    {
-        if (array[i][col])
-        {
-            count++;
-        }
-    }
-    if (!count)
-    {
-        count = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (array[i][col])
-            {
-                count++;
-            }
-        }
-        if (!count)
-        {
-            count = 0;
-            //check pos diag
-            for (int i = row, j = col; i >= 0 && j >= 0; i--, j--)
-            {
-                if (array[i][j])
-                {
-                    count++;
-                }
-            }
-            for (int i = row, j = col; i < n && j < n; i++, j++)
-            {
-                if (array[i][j])
-                {
-                    count++;
-                }
-            }
-            if (!count)
-            {
-                count = 0;
-                //check neg diag
-                for (int i = row, j = col; j >= 0 && i < n; i++, j--)
-                {
-                    if (array[i][j])
-                    {
-                        count++;
-                    }
-                }
-                for (int i = row, j = col; j < n && i >= 0; i--, j++)
-                {
-                    if (array[i][j])
-                    {
-                        count++;
-                    }
-                }
-                if (!count)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-    }
-    else
-    {
-        return false;
-    }
-}
-*/
+
 
 int isLegalPosition(int *array[], int row, int col, int n)
 {
@@ -156,6 +74,7 @@ int isLegalPosition(int *array[], int row, int col, int n)
 
 //TODO: recursive function that branches per row to find first legal position
 //clear row if solution not found and we backtrack
+
 
 //find the next legal position
 int nextLegalPosition(int *array[], int row, int col, int n)
