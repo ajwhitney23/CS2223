@@ -30,7 +30,7 @@ void placeQueen(int row, int col, int *array[])
 {
     array[row][col] = 1;
 }
-
+/*
 bool isLegalPosition(int *array[], int row, int col, int n)
 {
     //parse through the column checking to see how many queens are in each column, cant be more than 1
@@ -112,6 +112,69 @@ bool isLegalPosition(int *array[], int row, int col, int n)
         return false;
     }
 }
+*/
+
+bool isLegalPosition(int *array[], int row, int col, int n)
+{
+    //parse through the column checking to see how many queens are in each column, cant be more than 1
+    for (int i = 0; i < n; i++)
+    {
+        if (array[i][col])
+        {
+            return false;
+        }
+    }
+    for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) //check down and to the left
+    {
+        if (array[i][j])
+        {
+            return false;
+        }
+    }
+    for (int i = row, j = col; i < n && j < n; i++, j++) //check up and to the right
+    {
+        if (array[i][j])
+        {
+            return false;
+        }
+    }
+    for (int i = row, j = col; j >= 0 && i < n; i++, j--)  //check up and to the left
+    {
+        if (array[i][j])
+        {
+            return false;
+        }
+    }
+    for (int i = row, j = col; j < n && i >= 0; i--, j++)  //check down and to the right
+    {
+        if (array[i][j])
+        {
+            return false;
+        }
+    }
+}
+
+//find the next legal position
+int nextLegalPosition(int *array[], int row, int col, int n)
+{
+    int ret = col;
+    if (ret == -1)
+    {
+        ret = 0;
+    }
+    if (isLegalPosition(array, row, ret, n) == false) //if isnt legal
+    {
+        cout << "false" << endl;
+        //while (!isLegalPosition(array, row, ret, n)) //go through each column checking if legal, once it is legal, exit loop
+        int temp;
+        for(ret = 0; (isLegalPosition(array, row, ret, n) == false) && (ret < n); ret++)
+        {
+            temp = ret;
+        }
+        ret = temp;
+    }
+    return ret; //return column number
+}
 
 int main(int argc, char **argv)
 {
@@ -145,24 +208,61 @@ int main(int argc, char **argv)
 
     int row;
     int col;
-
-    for (int i = 0; i < n; i++)
+    int p = atoi(argv[1]);
+    /*
+    if(argc == 2)
     {
-        col = array[i];
-        row = i;
-        if (col != -1)
+        p = atoi(argv[1]);
+    }
+    else
+    {
+        p = 0;
+    }
+    */
+    if (p == 1)
+    {
+        for (int i = 0; i < n; i++)
         {
-            bool x = isLegalPosition(board, row, col, n);
-            if (x)
+            col = array[i];
+            row = i;
+            if (col != -1)
+            {
+                bool x = isLegalPosition(board, row, col, n);
+                if (x)
+                {
+                    placeQueen(row, col, board);
+                    cout << row << ", " << col << " is a legal position" << endl;
+                }
+                else
+                {
+                    cout << row << ", " << col << " is not a legal position" << endl;
+                }
+            }
+        }
+    }
+    if (p == 2)
+    {   
+        int temp;
+        for (int i = 0; i < n; i++)
+        {
+            temp = array[i];
+            col = nextLegalPosition(board, row, temp, n);
+            row = i;
+            if (col != -1)
             {
                 placeQueen(row, col, board);
-                cout << row << ", " << col << " is a legal position" << endl;
+                cout << "Placing queen at: " << row << " " << col << endl;
             }
             else
             {
-                cout << row << ", " << col << " is not a legal position" << endl;
+                cout << "No legal position found at: " << row << " " << col << endl;
             }
         }
+    }
+    if(p == 0)
+    {
+        cout << "Usage: ./queens <partnum>" << endl;
+        cout << "<partnum> = 1 or 2 or 3... etc" << endl;
     }
     for (int i = 0; i < n; i++)
     {
