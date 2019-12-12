@@ -138,14 +138,14 @@ int isLegalPosition(int *array[], int row, int col, int n)
             return 0;
         }
     }
-    for (int i = row, j = col; j >= 0 && i < n; i++, j--)  //check up and to the left
+    for (int i = row, j = col; j >= 0 && i < n; i++, j--) //check up and to the left
     {
         if (array[i][j])
         {
             return 0;
         }
     }
-    for (int i = row, j = col; j < n && i >= 0; i--, j++)  //check down and to the right
+    for (int i = row, j = col; j < n && i >= 0; i--, j++) //check down and to the right
     {
         if (array[i][j])
         {
@@ -154,22 +154,27 @@ int isLegalPosition(int *array[], int row, int col, int n)
     }
 }
 
+//TODO: recursive function that branches per row to find first legal position
+//clear row if solution not found and we backtrack
+
 //find the next legal position
 int nextLegalPosition(int *array[], int row, int col, int n)
 {
-    if(col == -1)
+    if (col == -1)
     {
+        cout << "col = -1" << endl;
         col = 0;
+        cout << col << endl;
     }
-    if(!isLegalPosition(array, row, col, n))
+    if (!isLegalPosition(array, row, col, n))
     {
         col = 0;
-        while((!isLegalPosition(array, row, col, n)) && (col < (n-1)))
+        while ((!isLegalPosition(array, row, col, n)) && (col < (n - 1)))
         {
             col++;
         }
     }
-    if(isLegalPosition(array, row, col, n))
+    if (isLegalPosition(array, row, col, n))
     {
         return col;
     }
@@ -179,25 +184,13 @@ int nextLegalPosition(int *array[], int row, int col, int n)
     }
 }
 
-void printBoard(int *array[], int n)
-{
-    for(int i = 0; i < n; i++)
-    {
-        for(int j = 0; j < n; j++)
-        {
-            cout << array[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
 int main(int argc, char **argv)
 {
     int n;
     cout << "enter the size of the board" << endl;
     cin >> n;
     int array[n];
-    cout << "enter the queens x postions below: " << endl;
+    cout << "enter the queens x postions below(one at a time): " << endl;
     cout << "NOTE: if you do not wish to place a queen type 0!!!" << endl;
     int temp;
     for (int i = 0; i < n; i++)
@@ -214,8 +207,6 @@ int main(int argc, char **argv)
             array[i] = -1;
         }
     }
-    cout << endl;
-    cout << endl;
 
     int *board[n];
     for (int i = 0; i < n; i++)
@@ -253,17 +244,12 @@ int main(int argc, char **argv)
                 else
                 {
                     cout << row << ", " << col << " is not a legal position" << endl;
-                    
                 }
             }
-            cout << "------------------------" << endl;
-            printBoard(board, n);
-            cout << "------------------------" << endl;
         }
-        
     }
     if (p == 2)
-    {   
+    {
         for (int i = 0; i < n; i++)
         {
             row = i;
@@ -277,12 +263,9 @@ int main(int argc, char **argv)
             {
                 cout << "No legal position found at: " << row << " " << col << endl;
             }
-            cout << "------------------------" << endl;
-            printBoard(board, n);
-            cout << "------------------------" << endl;
         }
     }
-    if(p == 0)
+    if (p == 0)
     {
         cout << "Usage: ./queens <partnum>" << endl;
         cout << "<partnum> = 1 or 2 or 3... etc" << endl;
