@@ -69,8 +69,8 @@ int isLegalPosition(int *array[], int row, int col, int n)
             return 0;
         }
     }
+    return 1;
 }
-
 
 //find the next legal position
 int nextLegalPosition(int *array[], int row, int col, int n)
@@ -99,26 +99,63 @@ int nextLegalPosition(int *array[], int row, int col, int n)
     }
 }
 
+void clearRow(int *array[], int row, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        array[row][i] = 0;
+    }
+}
+
 //TODO: recursive function that branches per row to find first legal position
 //clear row if solution not found and we backtrack
-int makeMove(int *array[], int row, int n, int userInput[])
+int makeMove(int *array[], int row, int n)
 {
-    //clear row
-    if (row >= n) //if done
+    if (row >= n)
     {
-        return 1;
+        return 1; //we recursed past the end of the board, return 1 for successful
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+        {
+            int legal = isLegalPosition(array, row, i, n);
+            if (legal)
+            {
+                placeQueen(row, i, array);
+                int result = makeMove(array, row + 1, n);
+                if (result == 1)
+                {
+                    return 1; //on good result, we're bouncing out completely
+                }
+                else
+                {
+                    clearRow(array, row, n); //on bad result, clear the row and iterate
+                }
+            }
+        }
+
+        //if control flow reaches here, we didn't find a legal position for current row
+        //in that case, return 0 and recursion will take care of the rest
+        return 0;
+    }
+
+    /*
+    if (row >= n)
+    {
+        return 1; //we recursed past the end of the board, return 1 for successful
     }
     int col;
     if (userInput[row] != -1) //user input hasnt been placed yet
     {
-        col = userInput[row];
+        col = userInput[row]; //place user input
         userInput[row] = -1;
     }
     else //user input has been placed or user didnt input one
     {
         for (int i = 0; i < n; i++)
         {
-            if (array[row][i]) //if queen is already placed
+            if (array[row][i]) //if queen is already placed, get spot and set row to 0
             {
                 col = i;
             }
@@ -126,26 +163,54 @@ int makeMove(int *array[], int row, int n, int userInput[])
         }
     }
 
+    for (int i = 0; i < n; i++)
+    {
+        int temp;
+        temp = nextLegalPosition(array, row, col, n);
+        if (temp == -1) //no legal moves left
+        {
+            return 0; //we found no legal moves on this path
+        }
+        else
+        {
+            //place at next legal position and go next row
+            placeQueen(row, temp, array);
+            int result = makeMove(array, row + 1, n, userInput);
+            if (result =)
+        }
+    }
     int temp;
     temp = nextLegalPosition(array, row, col, n);
-    if (temp == -1) //no legal moves
+    if (temp == -1) //no legal moves left
     {
-        //make move row above
-        makeMove(array, row - 1, n, userInput);
+        return 0; //we found no legal moves on this path
     }
     else
     {
-        //place and go next row
+        //place at next legal position and go next row
         placeQueen(row, temp, array);
-        return makeMove(array, row + 1, n, userInput);
+        int result = makeMove(array, row + 1, n, userInput);
+        if (result =)
+    }
+    */
+}
+
+void initializeBoard(int *array[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            array[i][j] = 0;
+        }
     }
 }
 
 void printBoard(int *array[], int n)
 {
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for(int j = 0; j < n; j++)
+        for (int j = 0; j < n; j++)
         {
             cout << array[i][j] << " ";
         }
@@ -236,10 +301,22 @@ int main(int argc, char **argv)
     }
     if (p == 3)
     {
-        int x = makeMove(board, 0, n, input);
-        if(x > 0)
+        n = 100;
+        int *secondBoard[n];
+        for (int i = 0; i < n; i++)
         {
-            printBoard(board, n);
+            secondBoard[i] = (int *)malloc(n * sizeof(int));
+        }
+        for (int i = 4; i < n; i++)
+        {
+            initializeBoard(secondBoard, n);
+            makeMove(secondBoard, 0, i);
+            cout << i << endl;
+            printBoard(secondBoard, i);
+        }
+        for (int i = 0; i < n; i++)
+        {
+            free(board[i]);
         }
     }
     if (p == 0)
