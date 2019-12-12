@@ -165,7 +165,7 @@ void printBoard(int *array[], int n)
     {
         for (int j = 0; j < n; j++)
         {
-            cout << (array[i][j] ? 'x' : '0') << " ";
+            cout << (array[i][j] ? 'Q' : '-') << " ";
         }
         cout << endl;
     }
