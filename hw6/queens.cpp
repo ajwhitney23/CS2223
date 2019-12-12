@@ -74,7 +74,37 @@ int isLegalPosition(int *array[], int row, int col, int n)
 
 //TODO: recursive function that branches per row to find first legal position
 //clear row if solution not found and we backtrack
-
+int makeMove(int *array[], int row, int n)
+{
+    //clear row
+    if(row >= n) //if done
+    {
+        return 1;
+    }
+    int col;
+    for(int i = 0; i < n; i++)
+    {
+        if(array[row][i]) //if queen is already placed
+        {
+            col = i;
+        }
+        array[row][i] = 0;
+    }
+    int temp;
+    temp = nextLegalPosition(array, row, col, n);
+    if(temp == -1)//no legal moves
+    {
+        //make move row above
+        makeMove(array, row-1, n);
+    }
+    else
+    {
+        //place and go next row
+        placeQueen(row, temp, array);
+        return makeMove(array, row+1, n);
+    }
+    
+}
 
 //find the next legal position
 int nextLegalPosition(int *array[], int row, int col, int n)
