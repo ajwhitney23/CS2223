@@ -113,9 +113,7 @@ int nextLegalPosition(int *array[], int row, int col, int n)
 {
     if (col == -1)
     {
-        cout << "col = -1" << endl;
         col = 0;
-        cout << col << endl;
     }
     if (!isLegalPosition(array, row, col, n))
     {
