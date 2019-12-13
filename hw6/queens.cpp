@@ -1,3 +1,4 @@
+//andrew whitney and alexander simoneau
 #include <cstdlib>
 #include <iostream>
 using namespace std;
@@ -133,6 +134,7 @@ int nextLegalPosition(int *array[], int row, int col, int n)
     }
 }
 
+//clear a row
 void clearRow(int *array[], int row, int n)
 {
     for (int i = 0; i < n; i++)
@@ -141,8 +143,6 @@ void clearRow(int *array[], int row, int n)
     }
 }
 
-//TODO: recursive function that branches per row to find first legal position
-//clear row if solution not found and we backtrack
 int makeMove(int *array[], int row, int n)
 {
     if (row >= n)
@@ -196,8 +196,6 @@ int findAllSolutions(int *array[], int row, int n)
             }
         }
 
-        //if control flow reaches here, we didn't find a legal position for current row
-        //in that case, return 0 and recursion will take care of the rest
         return acc;
     }
 }
